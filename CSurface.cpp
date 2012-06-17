@@ -17,6 +17,20 @@ SDL_Surface* CSurface::OnLoad(char* File) {
     return Surf_Return;
 }
 
+SDL_Surface* CSurface::OnLoadPng(char* File) {
+
+    SDL_Surface* Surf_Temp = NULL;
+    SDL_Surface* Surf_Return = NULL;
+
+    if((Surf_Temp = IMG_Load(File)) == NULL)
+        return NULL;
+
+    Surf_Return = SDL_DisplayFormatAlpha(Surf_Temp);
+    SDL_FreeSurface(Surf_Temp);
+
+    return Surf_Return;
+}
+
 bool CSurface::Transparent(SDL_Surface* Surf_Dest, int R, int G, int B) {
     if(Surf_Dest == NULL) {
         return false;
