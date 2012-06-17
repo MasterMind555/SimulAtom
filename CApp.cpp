@@ -4,7 +4,10 @@
 
 CApp::CApp() {
     screen = NULL;
+    saLogo = NULL;
+    background = NULL;
     Running = true;
+    gameState = Main_menu;
 }
 
 int CApp::OnExecute() {
@@ -21,6 +24,7 @@ int CApp::OnExecute() {
         }
 
         OnLoop();
+
         OnRender();
     }
 

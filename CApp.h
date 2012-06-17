@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include "CEvent.h"
 #include "CSurface.h"
+#include "Constants.h"
 
 class CApp : public CEvent {
 
@@ -11,12 +12,16 @@ class CApp : public CEvent {
         bool            Running;
         SDL_Surface*    screen;
 
+        SDL_Surface*    background;
+        SDL_Surface*    saLogo;
+
+
+        int             gameState;
     public:
         CApp();
 
         int OnExecute();
 
-    public:
         bool OnInit();
 
         void Reset();

@@ -1,8 +1,11 @@
 #ifndef CONSTANTS_H_INCLUDED
     #define CONSTANTS_H_INCLUDED
 
-    const int screenWidth = 640;
-    const int screenHeight = 480;
+    const int SCREEN_WIDTH = 1024;
+    const int SCREEN_HEIGHT = 768;
+
+    const int SA_LOGO_WIDTH = 1101;
+    const int SA_LOGO_HEIGHT = 662;
 
     enum {
 	HYDROGEN = 1,
@@ -123,6 +126,11 @@
 	UNUNHEXIUM,
 	UNUNSEPTIUM,
 	UNUNOCTIUM
+};
+
+enum{
+    Main_menu = 0,
+    Game_screen
 };
 
 #endif // CONSTANTS_H_INCLUDED
