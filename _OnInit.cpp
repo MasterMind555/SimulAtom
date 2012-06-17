@@ -1,8 +1,8 @@
-#include "CApp.h"
+#include "_SimulAtomMain.h"
 #include "CSurface.h"
 #include "Constants.h"
 
-bool CApp::OnInit() {
+bool SimulAtomMain::OnInit() {
 
 
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {

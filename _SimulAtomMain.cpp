@@ -1,8 +1,8 @@
-#include "CApp.h"
+#include "_SimulAtomMain.h"
 
 
 
-CApp::CApp() {
+SimulAtomMain::SimulAtomMain() {
     screen = NULL;
     saLogo = NULL;
     background = NULL;
@@ -10,7 +10,7 @@ CApp::CApp() {
     gameState = MAIN_MENU;
 }
 
-int CApp::OnExecute() {
+int SimulAtomMain::OnExecute() {
     if(OnInit() == false) {
         return -1;
     }
@@ -34,12 +34,12 @@ int CApp::OnExecute() {
 }
 
 int main(int argc, char* argv[]) {
-    CApp theApp;
+    SimulAtomMain theApp;
 
     return theApp.OnExecute();
 }
 
-void CApp::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode){
+void SimulAtomMain::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode){
 
     if(gameState == MAIN_MENU)
     {

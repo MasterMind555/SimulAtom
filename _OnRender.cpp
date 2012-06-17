@@ -1,7 +1,7 @@
-#include "CApp.h"
+#include "_SimulAtomMain.h"
 #include "CSurface.h"
 
-void CApp::OnRender() {
+void SimulAtomMain::OnRender() {
 
     if(gameState == GAME_SCREEN)
     {

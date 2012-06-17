@@ -1,6 +1,6 @@
-#include "CApp.h"
+#include "_SimulAtomMain.h"
 
-void CApp::OnCleanup() {
+void SimulAtomMain::OnCleanup() {
     free(screen);
     free(saLogo);
     free(background);
