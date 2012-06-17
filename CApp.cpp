@@ -7,7 +7,7 @@ CApp::CApp() {
     saLogo = NULL;
     background = NULL;
     Running = true;
-    gameState = Main_menu;
+    gameState = MAIN_MENU;
 }
 
 int CApp::OnExecute() {
@@ -37,4 +37,18 @@ int main(int argc, char* argv[]) {
     CApp theApp;
 
     return theApp.OnExecute();
+}
+
+void CApp::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode){
+
+    if(gameState == MAIN_MENU)
+    {
+        if(sym == SDLK_RETURN)
+            gameState = GAME_SCREEN;
+    }
+    else if(gameState == GAME_SCREEN)
+    {
+        if(sym == SDLK_ESCAPE)
+            gameState = MAIN_MENU;
+    }
 }

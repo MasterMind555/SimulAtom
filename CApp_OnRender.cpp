@@ -3,11 +3,11 @@
 
 void CApp::OnRender() {
 
-    if(gameState == Game_screen)
+    if(gameState == GAME_SCREEN)
     {
-
+        CSurface::OnDraw(screen, background, 0, 0);
     }
-    else if(gameState == Main_menu)
+    else if(gameState == MAIN_MENU)
     {
         CSurface::OnDraw(screen, background, 0, 0);
         CSurface::OnDraw(screen, saLogo, (SCREEN_WIDTH - SA_LOGO_WIDTH) / 2, (SCREEN_HEIGHT - SA_LOGO_HEIGHT) / 2 );

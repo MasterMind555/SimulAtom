@@ -36,6 +36,8 @@ class CApp : public CEvent {
 
         void OnCleanup();
 
+        void OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode);
+
 };
 
 #endif
