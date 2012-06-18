@@ -5,7 +5,6 @@ Button::Button(){
     y = -1;
     width = -1;
     height = -1;
-    icon = NULL;
     lastPos = NULL;
 }
 
@@ -56,10 +55,10 @@ bool Button::checkMouseExit(int X, int Y){
 }
 
 bool Button::checkIfValid() {
-    if( x > 0 && x < 2000 &&
-        y > 0 && y < 2000 &&
-        width > 0 && width < 2000 &&
-        height > 0 && height < 2000)
+    if( x > 0 && x < SCREEN_WIDTH &&
+        y > 0 && y < SCREEN_HEIGHT &&
+        width > 0 && width < SCREEN_WIDTH &&
+        height > 0 && height < SCREEN_HEIGHT)
         return true;
 
     return false;
@@ -99,11 +98,10 @@ void Button::setHeight(int val){
     height = val;
 }
 
-
 SDL_Surface* Button::getIcon(){
-    return icon;
+    return &icon;
 }
 
-void Button::setIcon(SDL_Surface* newIcon){
+void Button::setIcon(SDL_Surface newIcon){
     icon = newIcon;
 }

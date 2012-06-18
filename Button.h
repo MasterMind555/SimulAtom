@@ -2,7 +2,7 @@
     #define BUTTON_H_INCLUDED
 
 #include <SDL.h>
-
+#include "Constants.h"
 /*
 
     TODO: Add support for buttons with different shapes
@@ -31,14 +31,14 @@ class Button {
         void            setHeight(int val);
 
         SDL_Surface*    getIcon();
-        void            setIcon(SDL_Surface* newIcon);
+        void            setIcon(SDL_Surface newIcon);
 
     private:
         int             x;
         int             y;
         int             width;
         int             height;
-        SDL_Surface*    icon;
+        SDL_Surface     icon;
         bool            lastPos;//If the mouse was on the button last time we checked
 
 
