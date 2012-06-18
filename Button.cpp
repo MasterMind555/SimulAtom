@@ -6,28 +6,60 @@ Button::Button(){
     width = -1;
     height = -1;
     icon = NULL;
-    action = NULL;
+    lastPos = NULL;
 }
 
-void Button::checkClick(int X, int Y){
+void Button::sleep(){
+    lastPos == NULL;
+}
+
+bool Button::checkMouseClick(int X, int Y, bool click){
+        if(click == true)
+        {
+             if(Y >= y &&
+               Y <= y + height &&
+               X >= x &&
+               X <= x + width)
+               {
+                   return true;
+               }
+        }
+    return false;
+}
+bool Button::checkMouseOver(int X, int Y){
 
     if(Y >= y &&
        Y <= y + height &&
        X >= x &&
        X <= x + width)
        {
-           action();
+           return true;
        }
+    return false;
 }
 
+bool Button::checkMouseExit(int X, int Y){
+    if(lastPos == NULL)
+    {
+        lastPos = checkMouseOver(X, Y);
+        return false;
+    }
+    else
+    {
+        if(lastPos == true && checkMouseOver(X, Y) == false)
+        {
+            lastPos = false;
+            return true;
+        }
+    }
+    return false;
+}
 
 bool Button::checkIfValid() {
     if( x > 0 && x < 2000 &&
         y > 0 && y < 2000 &&
-        icon != NULL &&
         width > 0 && width < 2000 &&
-        height > 0 && height < 2000 &&
-        action != NULL)
+        height > 0 && height < 2000)
         return true;
 
     return false;

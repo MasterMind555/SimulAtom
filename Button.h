@@ -3,13 +3,22 @@
 
 #include <SDL.h>
 
+/*
+
+    TODO: Add support for buttons with different shapes
+
+*/
+
 class Button {
 
     public:
                         Button();
-        void            checkClick(int X, int Y);
-
+        bool            checkMouseClick(int X, int Y, bool click);
+        bool            checkMouseOver(int X, int Y);
+        bool            checkMouseExit(int X, int Y);
         bool            checkIfValid();
+
+        void            sleep();//Resets some of the variables used by the event functions to prevent unwanted behaviors
 
         int             getX();
         int             getY();
@@ -24,15 +33,13 @@ class Button {
         SDL_Surface*    getIcon();
         void            setIcon(SDL_Surface* newIcon);
 
-        void            setAction(void (*newAction)());
-
     private:
         int             x;
         int             y;
         int             width;
         int             height;
         SDL_Surface*    icon;
-        void (*action)();
+        bool            lastPos;//If the mouse was on the button last time we checked
 
 
 
