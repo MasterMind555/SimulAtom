@@ -37,8 +37,8 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
-    menuButtons[PLAY_BUTTON].setIcon(*playIcon);
-    menuButtons[EXIT_BUTTON].setIcon(*exitIcon);
+    menuButtons[PLAY_BUTTON].setIcon(&playIcon);
+    menuButtons[EXIT_BUTTON].setIcon(&exitIcon);
 
 
     //Redirects sdtou and stderr output to the debug console

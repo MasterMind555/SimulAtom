@@ -16,7 +16,10 @@ class SimulAtomMain : public CEvent {
         SDL_Surface*    background;
         SDL_Surface*    saLogo;
 
-        Button          menuButtons[2];
+        SDL_Surface*    playIcon;
+        SDL_Surface*    exitIcon;
+
+        Button          menuButtons[NUM_MENU_BUTTONS];
         int             gameState;
     public:
         SimulAtomMain();

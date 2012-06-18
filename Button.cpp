@@ -6,10 +6,12 @@ Button::Button(){
     width = -1;
     height = -1;
     lastPos = NULL;
+    icon = NULL;
 }
 
+
 void Button::sleep(){
-    lastPos == NULL;
+    lastPos = NULL;
 }
 
 bool Button::checkMouseClick(int X, int Y, bool click){
@@ -99,9 +101,9 @@ void Button::setHeight(int val){
 }
 
 SDL_Surface* Button::getIcon(){
-    return &icon;
+    return *icon;
 }
 
-void Button::setIcon(SDL_Surface newIcon){
+void Button::setIcon(SDL_Surface** newIcon){
     icon = newIcon;
 }

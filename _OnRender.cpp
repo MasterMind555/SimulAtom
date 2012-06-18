@@ -12,6 +12,7 @@ void SimulAtomMain::OnRender() {
         CSurface::OnDraw(screen, background, 0, 0);
         CSurface::OnDraw(screen, saLogo, (SCREEN_WIDTH - SA_LOGO_WIDTH) / 2, (SCREEN_HEIGHT - SA_LOGO_HEIGHT) / 2 );
 
+
         int i;
         for(i = 0; i < NUM_MENU_BUTTONS; i++)
         {
