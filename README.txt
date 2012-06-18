@@ -9,4 +9,4 @@ Simple story:
 * Do whatever you want (exceptions: see below) with our code.
 
 * Do not use this without attribution.
-* Do not use this commercially.
+* Do not use this without sharing the same license as ours.
