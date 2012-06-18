@@ -9,7 +9,7 @@ class Button {
                         Button();
         void            checkClick(int X, int Y);
 
-        bool             checkIfValid();
+        bool            checkIfValid();
 
         int             getX();
         int             getY();
@@ -22,14 +22,16 @@ class Button {
         void            setHeight(int val);
 
         SDL_Surface*    getIcon();
-        void            setIcon(SDL_Surface* icon);
+        void            setIcon(SDL_Surface* newIcon);
+
+        void            setAction(void (*newAction)());
+
     private:
         int             x;
         int             y;
         int             width;
         int             height;
         SDL_Surface*    icon;
-
         void (*action)();
 
 

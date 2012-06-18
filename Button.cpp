@@ -8,6 +8,7 @@ Button::Button(){
     icon = NULL;
     action = NULL;
 }
+
 void Button::checkClick(int X, int Y){
 
     if(Y >= y &&
@@ -41,6 +42,15 @@ int Button::getY(){
     return y;
 }
 
+void Button::setX(int val){
+    x = val;
+}
+
+void Button::setY(int val){
+    y = val;
+}
+
+
 int Button::getWidth(){
     return width;
 }
@@ -49,6 +59,19 @@ int Button::getHeight(){
     return height;
 }
 
+void Button::setWidth(int val){
+    width = val;
+}
+
+void Button::setHeight(int val){
+    height = val;
+}
+
+
 SDL_Surface* Button::getIcon(){
     return icon;
+}
+
+void Button::setIcon(SDL_Surface* newIcon){
+    icon = newIcon;
 }
