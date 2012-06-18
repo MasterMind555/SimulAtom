@@ -42,6 +42,8 @@ class SimulAtomMain : public CEvent {
 
         void OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode);
 
+        void OnLButtonDown(int mX, int mY);
+
 };
 
 #endif

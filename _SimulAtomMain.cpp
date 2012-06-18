@@ -60,14 +60,21 @@ int main(int argc, char* argv[]) {
 
 void SimulAtomMain::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode){
 
-    if(gameState == MAIN_MENU)
-    {
-        if(sym == SDLK_RETURN)
-            gameState = GAME_SCREEN;
-    }
-    else if(gameState == GAME_SCREEN)
+    if(gameState == GAME_SCREEN)
     {
         if(sym == SDLK_ESCAPE)
             gameState = MAIN_MENU;
     }
+}
+void SimulAtomMain::OnLButtonDown(int mX, int mY){
+
+    if(menuButtons[EXIT_BUTTON].checkMouseClick(mX, mY, true))
+    {
+        Running = false;
+    }
+    else if(menuButtons[PLAY_BUTTON].checkMouseClick(mX, mY, true))
+    {
+        gameState = GAME_SCREEN;
+    }
+
 }
