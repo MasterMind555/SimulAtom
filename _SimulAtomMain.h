@@ -5,6 +5,7 @@
 #include "CEvent.h"
 #include "CSurface.h"
 #include "Constants.h"
+#include "Button.h"
 
 class SimulAtomMain : public CEvent {
 
@@ -15,7 +16,7 @@ class SimulAtomMain : public CEvent {
         SDL_Surface*    background;
         SDL_Surface*    saLogo;
 
-
+        Button          menuButtons[2];
         int             gameState;
     public:
         SimulAtomMain();
