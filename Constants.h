@@ -7,6 +7,14 @@
     const int SA_LOGO_WIDTH = 566;
     const int SA_LOGO_HEIGHT = 439;
 
+    const int NUM_MENU_BUTTONS = 2;
+
+    //The order of the buttons
+    enum {
+        EXIT_BUTTON = 0,
+        PLAY_BUTTON
+    };
+
     enum {
 	HYDROGEN = 1,
 	HELIUM,
