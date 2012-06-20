@@ -1,7 +1,6 @@
 #include "_SimulAtomMain.h"
 
 
-#include <windows.h>//I know.
 
 //Variables for the FPS limitor
 int fpsFrames;
@@ -17,10 +16,10 @@ void SimulAtomMain::OnLoop() {
                 atoms[i]->move();
             }
 
-    //TODO: Make fps counter for other plateforms
+
     fpsFrames++;
     fpsLastUpdateTime = fpsCurrentTime;
-    fpsCurrentTime = GetTickCount();//GetTickCount() is in windows.h
+    fpsCurrentTime = SDL_GetTicks();
     fpsElapsedTime = fpsCurrentTime - fpsLastUpdateTime;
 
     int waitTime = (int)((1000/MAX_FPS) - fpsElapsedTime);
