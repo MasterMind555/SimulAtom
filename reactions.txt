@@ -1,0 +1,3 @@
+[ACID] + [BASE] -> [SALT] + WATER
+[ACID] + [METAL IA-IIA] -> [SALT] + HYDROGEN
+[METAL] + [OXYGEN] -> [OXIDE]
