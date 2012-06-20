@@ -8,6 +8,8 @@ Atom::Atom(int x, int y, int numProtons, int numNeutrons){
     neutrons = numNeutrons;
     temperature = 0;
 
+    velX = (rand()%10) - 5;
+    velY = (rand()%10) - 5;
 }
 
 int Atom::getPosX(){
@@ -24,6 +26,22 @@ void Atom::setPosX(int val){
 
 void Atom::setPosY(int val){
     posY = val;
+}
+
+int Atom::getVelX(){
+    return velX;
+}
+
+int Atom::getVelY(){
+    return velY;
+}
+
+void Atom::setVelX(int val){
+    velX = val;
+}
+
+void Atom::setVelY(int val){
+    velY = val;
 }
 
 int Atom::getAmountProtons(){
@@ -59,3 +77,18 @@ void setBonded(bool val){
 
 }
 */
+
+void Atom::move(){
+
+    if(posX + velX < 0 || posX + velX > SCREEN_WIDTH - 20){//Minus 20 because of the offset of the texture ( Which is 20x20 )
+        velX *= -1;
+    }
+
+    if(posY + velY < 0 || posY + velY > SCREEN_HEIGHT - 20){
+        velY *= -1;
+    }
+
+    posX += velX;
+    posY += velY;
+
+}
