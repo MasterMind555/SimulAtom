@@ -12,6 +12,9 @@
     TO THE EXTENT THIS LICENSE MAY BE CONSIDERED TO BE A CONTRACT, THE LICENSOR GRANTS YOU THE RIGHTS CONTAINED HERE IN CONSIDERATION OF YOUR ACCEPTANCE OF SUCH TERMS AND CONDITIONS.
 */
 
+#include "Constants.h"
+#include <stdlib.h>
+
 
 class Atom{
 
@@ -19,8 +22,15 @@ class Atom{
                         Atom(int x, int y, int numProtons, int numNeutrons);
         int             getPosX();
         int             getPosY();
+
         void            setPosX(int val);
         void            setPosY(int val);
+
+        int             getVelX();
+        int             getVelY();
+
+        void            setVelX(int val);
+        void            setVelY(int val);
 
         int             getAmountProtons();
         void            setAmountProtons(int val);
@@ -34,14 +44,19 @@ class Atom{
         bool            getBonded();
         //void          setBonded(bool val);
 
+        void            move();
+
 
     private:
         int             posX;
         int             posY;
+        int             velX;
+        int             velY;
         int             protons;
         int             neutrons;
         bool            bonded;
         int             temperature;
+
 
 };
 

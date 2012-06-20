@@ -3,6 +3,7 @@
 #include "Constants.h"
 
 bool SimulAtomMain::OnInit() {
+    //Redirects stdout and stderr output to the debug console
     freopen("CON", "w", stdout);
     freopen("CON", "w", stderr);
 
@@ -38,13 +39,14 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
+    if((atomIcon = CSurface::OnLoadPng("img/atom_red.png")) == NULL) {
+        printf("Can't find atom icon");
+        return false;
+    }
 
 
     menuButtons[PLAY_BUTTON].setIcon(&playIcon);
     menuButtons[EXIT_BUTTON].setIcon(&exitIcon);
-
-
-    //Redirects sdtou and stderr output to the debug console
 
 
     return true;
