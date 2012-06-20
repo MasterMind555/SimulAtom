@@ -6,5 +6,6 @@ void SimulAtomMain::OnCleanup() {
     free(background);
     free(playIcon);
     free(exitIcon);
+    free(atomIcon);
     SDL_Quit();
 }
