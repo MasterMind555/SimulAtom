@@ -25,6 +25,7 @@ class SimulAtomMain : public CEvent {
         Button          menuButtons[NUM_MENU_BUTTONS];
         Atom*           atoms[32];
         int             gameState;
+
         void            setAtomDemo();
     public:
         SimulAtomMain();

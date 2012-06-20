@@ -9,6 +9,8 @@
 
     const int NUM_MENU_BUTTONS = 2;
 
+    const int MAX_FPS = 60;
+
     //The order of the buttons
     enum {
         EXIT_BUTTON = 0,
