@@ -1,8 +1,8 @@
-#ifndef _CSURFACE_H_
-    #define _CSURFACE_H_
+#ifndef MOLECULE_H_INCLUDED
+#define MOLECULE_H_INCLUDED
 
 /*
-    Surface 'Library', holds methods to load and draw SDL_Surface's
+    Molecule template class.
 
     THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE").
     THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW.
@@ -12,21 +12,28 @@
     TO THE EXTENT THIS LICENSE MAY BE CONSIDERED TO BE A CONTRACT, THE LICENSOR GRANTS YOU THE RIGHTS CONTAINED HERE IN CONSIDERATION OF YOUR ACCEPTANCE OF SUCH TERMS AND CONDITIONS.
 */
 
-#include <SDL.h>
-#include <SDL_image.h>
+#include "Atom.h"
 
-class CSurface {
+class Molecule{
     public:
-        CSurface();
+                        Molecule(Atom components[]);
+        int             getPosX();
+        int             getPosY();
+        void            setPosX(int val);
+        void            setPosY(int val);
 
-    public:
-        static SDL_Surface* OnLoad(char* File);
+        int             getTemperature();
+        void            setTemperature(int val);
 
-        static SDL_Surface* OnLoadPng(char* File);
+    private:
+        int             posX;
+        int             posY;
+        Atom*           atoms[];
+        int             temperature;
 
-        static bool OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y);
 
-        static bool Transparent(SDL_Surface* Surf_Dest, int R, int G, int B);
+
 };
 
-#endif
+
+#endif // MOLECULE_H_INCLUDED

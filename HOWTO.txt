@@ -1,0 +1,14 @@
+How to build:
+
+You will need to aquire and setup the libraries for SDL and SDL_Image, which can be found here : http://www.libsdl.org/download-1.2.php and here : http://www.libsdl.org/projects/SDL_image/
+
+	Code::Block Setup:
+		
+		1. create a new empty project, then add all the source files.
+		2. Go to Project->Build Options->Debug ( On the left side )->Linker settings
+		3. Add these four libraries in this order : "mingw32", "SDLmain", "SDL", "SDL_Image"
+		4. Go to the "Search directories" tab, then the "Compiler" subtab and add the path the "include" folder in both SDL and SDL_Image (SDL-x.x.xx\include and SDL_image-x.x.xx\include)
+		5. Go to the "Linker" subtab and add the path to the "lib" folder in both SDL and SDL_Image
+
+
+	--Feel free to add tutorials for other plateforms/IDEs--
