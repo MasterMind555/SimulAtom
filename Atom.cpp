@@ -6,10 +6,10 @@ Atom::Atom(int x, int y, int numProtons, int numNeutrons){
     posY = y;
     protons = numProtons;
     neutrons = numNeutrons;
-    temperature = 0;
+    temperature = 295;
 
-    velX = (rand()%10) - 5;
-    velY = (rand()%10) - 5;
+    velX = 0;
+    velY = 0;
 }
 
 int Atom::getPosX(){
@@ -80,6 +80,13 @@ void setBonded(bool val){
 
 void Atom::move(){
 
+    int wiggleX = 0;
+    int wiggleY = 0;
+
+    wiggleX = ((rand() % 3) - 1) *(temperature / 50);
+    wiggleY = ((rand() % 3) - 1)*(temperature / 50);
+
+
     if(posX + velX < 0 || posX + velX > SCREEN_WIDTH - 20){//Minus 20 because of the offset of the texture ( Which is 20x20 )
         velX *= -1;
     }
@@ -88,7 +95,15 @@ void Atom::move(){
         velY *= -1;
     }
 
-    posX += velX;
-    posY += velY;
+    if(posX + wiggleX < 0 || posX + wiggleX > SCREEN_WIDTH - 20){//Minus 20 because of the offset of the texture ( Which is 20x20 )
+        wiggleX *= -1;
+    }
+
+    if(posY + wiggleY < 0 || posY + wiggleY > SCREEN_HEIGHT - 20){
+        wiggleY *= -1;
+    }
+
+    posX += velX + wiggleX;
+    posY += velY + wiggleY;
 
 }

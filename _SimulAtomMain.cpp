@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
 }
 
 void SimulAtomMain::setAtomDemo(){
-    atoms[0] = new Atom(500, 400, 1, 1);
+    atoms[0] = new Atom(50, 40, 1, 1);
 
 }
 
