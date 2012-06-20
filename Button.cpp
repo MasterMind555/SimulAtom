@@ -20,7 +20,7 @@ bool Button::checkMouseClick(int X, int Y, bool click){
              if(Y >= y &&
                Y <= y + height &&
                X >= x &&
-               X <= x + width)
+               X <= x + width)//If the mouse is within the bounds of the button when the click happends
                {
                    return true;
                }
@@ -32,7 +32,7 @@ bool Button::checkMouseOver(int X, int Y){
     if(Y >= y &&
        Y <= y + height &&
        X >= x &&
-       X <= x + width)
+       X <= x + width)//If the mouse is within the bounds of the button when the click happends
        {
            return true;
        }
@@ -40,14 +40,14 @@ bool Button::checkMouseOver(int X, int Y){
 }
 
 bool Button::checkMouseExit(int X, int Y){
-    if(lastPos == NULL)
+    if(lastPos == NULL)//If we don't know if the mouse was on or outside the button before
     {
-        lastPos = checkMouseOver(X, Y);
+        lastPos = checkMouseOver(X, Y);//Check it now
         return false;
     }
     else
     {
-        if(lastPos == true && checkMouseOver(X, Y) == false)
+        if(lastPos == true && checkMouseOver(X, Y) == false)//If the mouse was on the button last time we checked but it is no more
         {
             lastPos = false;
             return true;
@@ -60,7 +60,7 @@ bool Button::checkIfValid() {
     if( x > 0 && x < SCREEN_WIDTH &&
         y > 0 && y < SCREEN_HEIGHT &&
         width > 0 && width < SCREEN_WIDTH &&
-        height > 0 && height < SCREEN_HEIGHT)
+        height > 0 && height < SCREEN_HEIGHT)//Cbecks if the variables are set to a correct number
         return true;
 
     return false;

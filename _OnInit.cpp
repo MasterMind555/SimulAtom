@@ -17,6 +17,7 @@ bool SimulAtomMain::OnInit() {
     }
 
 
+
     if((saLogo = CSurface::OnLoadPng("img/logo.png")) == NULL) {
         printf("Can't find SimulAtom Logo");
         return false;
@@ -36,6 +37,8 @@ bool SimulAtomMain::OnInit() {
         printf("Can't find exit icon");
         return false;
     }
+
+
 
     menuButtons[PLAY_BUTTON].setIcon(&playIcon);
     menuButtons[EXIT_BUTTON].setIcon(&exitIcon);

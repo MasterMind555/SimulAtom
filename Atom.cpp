@@ -2,6 +2,7 @@
 
 Atom::Atom(int x, int y, int numProtons, int numNeutrons){
 
+    //Initializes a new Atom of given type with the given coordinates at 0K
     posX = x;
     posY = y;
     protons = numProtons;

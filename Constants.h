@@ -1,12 +1,27 @@
 #ifndef CONSTANTS_H_INCLUDED
     #define CONSTANTS_H_INCLUDED
 
+/*
+    Constants header, holds all the constants in the game to be able to modify them easily
+
+    THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE").
+    THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW.
+    ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR COPYRIGHT LAW IS PROHIBITED.
+
+    BY EXERCISING ANY RIGHTS TO THE WORK PROVIDED HERE, YOU ACCEPT AND AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE.
+    TO THE EXTENT THIS LICENSE MAY BE CONSIDERED TO BE A CONTRACT, THE LICENSOR GRANTS YOU THE RIGHTS CONTAINED HERE IN CONSIDERATION OF YOUR ACCEPTANCE OF SUCH TERMS AND CONDITIONS.
+*/
+
+
+    //The screen's dimensions
     const int SCREEN_WIDTH = 1024;
     const int SCREEN_HEIGHT = 768;
 
+    //The size of the 'SimulAtom' Logo
     const int SA_LOGO_WIDTH = 566;
     const int SA_LOGO_HEIGHT = 439;
 
+    //How many buttons we have in the menu
     const int NUM_MENU_BUTTONS = 2;
 
     //The order of the buttons
@@ -15,6 +30,13 @@
         PLAY_BUTTON
     };
 
+    //The possible states of the game
+    enum{
+        MAIN_MENU = 0,
+        GAME_SCREEN
+    };
+
+    //All the elements of the periodic table
     enum {
 	HYDROGEN = 1,
 	HELIUM,
@@ -134,11 +156,6 @@
 	UNUNHEXIUM,
 	UNUNSEPTIUM,
 	UNUNOCTIUM
-};
-
-enum{
-    MAIN_MENU = 0,
-    GAME_SCREEN
 };
 
 #endif // CONSTANTS_H_INCLUDED

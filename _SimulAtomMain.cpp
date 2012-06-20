@@ -1,17 +1,19 @@
 #include "_SimulAtomMain.h"
 
 
-
 SimulAtomMain::SimulAtomMain() {
+
+    //Sets all the pointers to NULL
     screen = NULL;
     saLogo = NULL;
     background = NULL;
     playIcon = NULL;
     exitIcon = NULL;
+
     Running = true;
     gameState = MAIN_MENU;
 
-
+    //Sets the play and exit button's position and size
     menuButtons[EXIT_BUTTON].setWidth(119);
     menuButtons[EXIT_BUTTON].setHeight(50);
     menuButtons[EXIT_BUTTON].setX(100);
@@ -66,6 +68,7 @@ void SimulAtomMain::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode){
             gameState = MAIN_MENU;
     }
 }
+
 void SimulAtomMain::OnLButtonDown(int mX, int mY){
 
     if(menuButtons[EXIT_BUTTON].checkMouseClick(mX, mY, true))
