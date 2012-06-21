@@ -2,28 +2,32 @@
 
 #include <stdio.h>
 
-Molecule::Molecule(Atom components[]){
+Molecule::Molecule(Atom* components, int size){
 
     velX = 0;
     velY = 0;
 
-    *atoms = components;
-    posX = atoms[0]->getPosX();
-    posY = atoms[0]->getPosY();
+    numAtoms = size;
+
+    atoms = components;
+
+    posX = atoms[0].getPosX();
+    posY = atoms[0].getPosY();
 
     int temp = 0;
     int i;
-    for(i = 0; i < sizeof(atoms); i++)
+    for(i = 0; i < numAtoms; i++)
     {
-        temp += atoms[i]->getTemperature();
+
+        temp += components[i].getTemperature();
     }
 
-
-
     if(temp > 0)
-        temp = temp / sizeof(atoms);
+        temp = temp /  numAtoms;
 
     temperature = temp;
+
+
 
 
 }

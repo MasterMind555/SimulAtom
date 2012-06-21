@@ -12,6 +12,14 @@ Atom::Atom(int x, int y, int numProtons, int numNeutrons){
     velY = 0;
 }
 
+Atom::Atom(){
+
+    temperature = 295;
+    velX = 0;
+    velY = 0;
+
+}
+
 int Atom::getPosX(){
     return posX;
 }

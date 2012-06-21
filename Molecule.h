@@ -5,7 +5,7 @@
 
 class Molecule{
     public:
-                        Molecule(Atom components[]);
+                        Molecule(Atom* components, int size);
         int             getPosX();
         int             getPosY();
         void            setPosX(int val);
@@ -22,7 +22,10 @@ class Molecule{
 
         int             velX;
         int             velY;
-        Atom*           atoms[2];
+
+        Atom*           atoms;
+        int             numAtoms;
+
         int             temperature;
 
 

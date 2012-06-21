@@ -31,15 +31,12 @@ void SimulAtomMain::OnLoop() {
                                 if(molecules[y] == NULL)
                                 {
 
+                                    Atom reactives[2];
 
-                                    Atom (*reactives)[2];
-                                    *reactives[0] = *atoms[i];
-                                    *reactives[1] = *atoms[e];
+                                    reactives[0] = *atoms[i];
+                                    reactives[1] = *atoms[e];
 
-                                        if(reactives[1] == NULL || reactives[0] == NULL)
-                                            printf("Something weird happened, a atom disappeared!");
-
-                                    molecules[y] = new Molecule(*reactives);
+                                    molecules[y] = new Molecule(reactives, 2);
 
                                     break;
                                 }
