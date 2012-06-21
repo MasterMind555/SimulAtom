@@ -6,7 +6,9 @@
 #include "CSurface.h"
 #include "Constants.h"
 #include "Button.h"
+
 #include "Atom.h"
+#include "Molecule.h"
 
 class SimulAtomMain : public CEvent {
 
@@ -21,9 +23,12 @@ class SimulAtomMain : public CEvent {
         SDL_Surface*    exitIcon;
 
         SDL_Surface*    atomIcon;
+        SDL_Surface*    moleculeIcon;
 
         Button          menuButtons[NUM_MENU_BUTTONS];
+
         Atom*           atoms[MAX_ATOMS];
+        Molecule*       molecules[MAX_MOLECULES];
         int             gameState;
 
         void            setAtomDemo();

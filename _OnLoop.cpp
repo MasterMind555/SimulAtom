@@ -12,10 +12,10 @@ void SimulAtomMain::OnLoop() {
     if(gameState == GAME_SCREEN)
     {
 
-    int count1, count2;
+    //int count1, count2;
     int i, e;
 
-    count1 = SDL_GetTicks();
+    //count1 = SDL_GetTicks();
     for(i = 0; i < MAX_ATOMS; i++)
         if(atoms[i] != NULL)
             {
@@ -26,6 +26,24 @@ void SimulAtomMain::OnLoop() {
                     {
                         if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
                         {
+                            int y;
+                            for(y = 0; y < MAX_MOLECULES; y++)
+                                if(molecules[y] == NULL)
+                                {
+
+
+                                    Atom (*reactives)[2];
+                                    *reactives[0] = *atoms[i];
+                                    *reactives[1] = *atoms[e];
+
+                                        if(reactives[1] == NULL || reactives[0] == NULL)
+                                            printf("Something weird happened, a atom disappeared!");
+
+                                    molecules[y] = new Molecule(*reactives);
+
+                                    break;
+                                }
+
                             free(atoms[i]);
                             atoms[i] = NULL;
                             free(atoms[e]);
@@ -35,8 +53,15 @@ void SimulAtomMain::OnLoop() {
 
                     }
             }
-        count2 = SDL_GetTicks();
-        printf("%d \n", count2 - count1);
+
+    for(i = 0; i < MAX_MOLECULES; i++)
+        if(molecules[i] != NULL)
+            {
+                molecules[i]->move();
+            }
+
+        //count2 = SDL_GetTicks();
+        //printf("%d \n", count2 - count1);
     }
 
     fpsFrames++;

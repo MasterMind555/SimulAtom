@@ -14,10 +14,15 @@ class Molecule{
         int             getTemperature();
         void            setTemperature(int val);
 
+        void            move();
+
     private:
         int             posX;
         int             posY;
-        Atom*           atoms[];
+
+        int             velX;
+        int             velY;
+        Atom*           atoms[2];
         int             temperature;
 
 

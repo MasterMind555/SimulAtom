@@ -10,10 +10,16 @@
     const int ATOM_ICON_WIDTH = 20;
     const int ATOM_ICON_HEIGHT = 20;
 
+    const int MOLECULE_ICON_WIDTH = 20;
+    const int MOLECULE_ICON_HEIGHT = 20;
+
     const int NUM_MENU_BUTTONS = 2;
 
     const int MAX_FPS = 60;
-    const int MAX_ATOMS = 1024;
+
+    const int MAX_ATOMS = 256;
+    const int MAX_MOLECULES = 128;
+
     //The order of the buttons
     enum {
         EXIT_BUTTON = 0,

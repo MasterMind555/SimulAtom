@@ -14,6 +14,9 @@ SimulAtomMain::SimulAtomMain() {
     for(i = 0; i < MAX_ATOMS; i++)
         atoms[i] = NULL;
 
+    for(i = 0; i < MAX_MOLECULES; i++)
+        molecules[i] = NULL;
+
 
     Running = true;
     gameState = MAIN_MENU;

@@ -1,7 +1,11 @@
 #include "Molecule.h"
 
+#include <stdio.h>
 
 Molecule::Molecule(Atom components[]){
+
+    velX = 0;
+    velY = 0;
 
     *atoms = components;
     posX = atoms[0]->getPosX();
@@ -13,9 +17,43 @@ Molecule::Molecule(Atom components[]){
     {
         temp += atoms[i]->getTemperature();
     }
-    temp /= i;
+
+
+
+    if(temp > 0)
+        temp = temp / sizeof(atoms);
 
     temperature = temp;
+
+
+}
+
+void Molecule::move(){
+    int wiggleX = 0;
+    int wiggleY = 0;
+
+    wiggleX = ((rand() % 3) - 1) * (temperature / 50);
+    wiggleY = ((rand() % 3) - 1) * (temperature / 50);
+
+
+    if(posX + velX < 0 || posX + velX > SCREEN_WIDTH - MOLECULE_ICON_WIDTH){//Minus 20 because of the offset of the texture ( Which is 20x20 )
+        velX *= -1;
+    }
+
+    if(posY + velY < 0 || posY + velY > SCREEN_HEIGHT - MOLECULE_ICON_HEIGHT){
+        velY *= -1;
+    }
+
+    if(posX + wiggleX < 0 || posX + wiggleX > SCREEN_WIDTH - MOLECULE_ICON_WIDTH){//Minus 20 because of the offset of the texture ( Which is 20x20 )
+        wiggleX *= -1;
+    }
+
+    if(posY + wiggleY < 0 || posY + wiggleY > SCREEN_HEIGHT - MOLECULE_ICON_HEIGHT){
+        wiggleY *= -1;
+    }
+
+    posX += velX + wiggleX;
+    posY += velY + wiggleY;
 }
 
 int Molecule::getPosX(){

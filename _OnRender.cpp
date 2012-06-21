@@ -13,6 +13,11 @@ void SimulAtomMain::OnRender() {
             {
                 CSurface::OnDraw(screen, atomIcon, atoms[i]->getPosX(), atoms[i]->getPosY());
             }
+        for(i = 0; i < MAX_MOLECULES; i++)
+            if(molecules[i] != NULL)
+            {
+                CSurface::OnDraw(screen, moleculeIcon, molecules[i]->getPosX(), molecules[i]->getPosY());
+            }
     }
     else if(gameState == MAIN_MENU)
     {

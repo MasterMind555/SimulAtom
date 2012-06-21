@@ -42,6 +42,10 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
+    if((moleculeIcon = CSurface::OnLoadPng("img/h2.png")) == NULL) {
+        printf("Can't find atom icon");
+        return false;
+    }
     menuButtons[PLAY_BUTTON].setIcon(&playIcon);
     menuButtons[EXIT_BUTTON].setIcon(&exitIcon);
 
