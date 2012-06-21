@@ -47,7 +47,6 @@
     };
 
     struct AtomProp {
-
         int protons;
         int neutrons;
         int oxydationNumber;
@@ -56,6 +55,12 @@
     };
 
     typedef AtomProp AtomTemplate;
+
+    struct MoleculeProp {
+        AtomTemplate* atoms;
+        int size;
+    };
+    typedef MoleculeProp MoleculeTemplate;
 
     enum {
 	HYDROGEN = 1,
@@ -181,10 +186,23 @@
     const AtomTemplate THydrogen{
         HYDROGEN,
         1,
-        1,
+        MINUS_ONE + PLUS_ONE,
         1
     };
 
+    const AtomTemplate THelium{
+        HELIUM,
+        2,
+        ZERO,
+        2
+    };
+
+    const AtomTemplate TLithium{
+        LITHIUM,
+        7,
+        PLUS_ONE,
+        1
+    };
 
 enum{
     MAIN_MENU = 0,
