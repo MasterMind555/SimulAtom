@@ -26,6 +26,26 @@
         PLAY_BUTTON
     };
 
+    enum {
+        MINUS_EIGHT = 1,
+        MINUS_SEVEN = 2,
+        MINUS_SIX = 4,
+        MINUS_FIVE = 8,
+        MINUS_FOUR = 16,
+        MINUS_THREE = 32,
+        MINUS_TWO = 64,
+        MINUS_ONE = 128,
+        ZERO = 256,
+        PLUS_ONE = 512,
+        PLUS_TWO = 1024,
+        PLUS_THREE = 2048,
+        PLUS_FOUR = 4096,
+        PLUS_FIVE = 8192,
+        PLUS_SIX = 16384,
+        PLUS_SEVEN = 32768,
+        PLUS_EIGHT = 65536
+    };
+
     struct AtomProp {
 
         int protons;
@@ -34,6 +54,7 @@
         int valenceElectrons;
 
     };
+
     typedef AtomProp AtomTemplate;
 
     enum {

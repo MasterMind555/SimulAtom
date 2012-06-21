@@ -12,6 +12,17 @@ Atom::Atom(int x, int y, int numProtons, int numNeutrons){
     velY = 0;
 }
 
+Atom::Atom(AtomTemplate properties, int x, int y){
+    posX = x;
+    posY = y;
+    protons = properties.protons;
+    neutrons = properties.neutrons;
+    temperature = 295;
+
+    velX = 0;
+    velY = 0;
+}
+
 Atom::Atom(){
 
     temperature = 295;

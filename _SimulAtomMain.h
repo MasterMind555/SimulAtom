@@ -33,6 +33,12 @@ class SimulAtomMain : public CEvent {
 
         void            setAtomDemo();
         bool            checkCollision(int xA, int yA, int xB, int yB);
+
+        /*
+            Switches of Simulation
+        */
+
+        bool            preciseCollision;
     public:
         SimulAtomMain();
 

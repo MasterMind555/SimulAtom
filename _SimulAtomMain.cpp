@@ -17,6 +17,7 @@ SimulAtomMain::SimulAtomMain() {
     for(i = 0; i < MAX_MOLECULES; i++)
         molecules[i] = NULL;
 
+    preciseCollision = false;
 
     Running = true;
     gameState = MAIN_MENU;
@@ -71,7 +72,7 @@ int main(int argc, char* argv[]) {
 void SimulAtomMain::setAtomDemo(){
     int i;
     for(i = 0; i < MAX_ATOMS; i++)
-            atoms[i] = new Atom(rand() % SCREEN_WIDTH - ATOM_ICON_WIDTH, rand() % SCREEN_HEIGHT - ATOM_ICON_HEIGHT, 1, 1);
+            atoms[i] = new Atom(THydrogen, rand() % SCREEN_WIDTH - ATOM_ICON_WIDTH, rand() % SCREEN_HEIGHT - ATOM_ICON_HEIGHT);
 
 
 }

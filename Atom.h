@@ -7,6 +7,7 @@
 class Atom{
 
     public:
+                        Atom(AtomTemplate properties, int x, int y);
                         Atom();
                         Atom(int x, int y, int numProtons, int numNeutrons);
         int             getPosX();
