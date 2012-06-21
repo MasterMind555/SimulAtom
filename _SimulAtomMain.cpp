@@ -11,7 +11,7 @@ SimulAtomMain::SimulAtomMain() {
     atomIcon = NULL;
 
     int i;
-    for(i = 0; i < 32; i++)
+    for(i = 0; i < MAX_ATOMS; i++)
         atoms[i] = NULL;
 
 
@@ -66,7 +66,10 @@ int main(int argc, char* argv[]) {
 }
 
 void SimulAtomMain::setAtomDemo(){
-    atoms[0] = new Atom(50, 40, 1, 1);
+    int i;
+    for(i = 0; i < MAX_ATOMS; i++)
+            atoms[i] = new Atom(rand() % SCREEN_WIDTH - ATOM_ICON_WIDTH, rand() % SCREEN_HEIGHT - ATOM_ICON_HEIGHT, 1, 1);
+
 
 }
 

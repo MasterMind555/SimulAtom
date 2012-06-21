@@ -7,15 +7,28 @@
     const int SA_LOGO_WIDTH = 566;
     const int SA_LOGO_HEIGHT = 439;
 
+    const int ATOM_ICON_WIDTH = 20;
+    const int ATOM_ICON_HEIGHT = 20;
+
     const int NUM_MENU_BUTTONS = 2;
 
     const int MAX_FPS = 60;
-
+    const int MAX_ATOMS = 1024;
     //The order of the buttons
     enum {
         EXIT_BUTTON = 0,
         PLAY_BUTTON
     };
+
+    struct AtomProp {
+
+        int protons;
+        int neutrons;
+        int oxydationNumber;
+        int valenceElectrons;
+
+    };
+    typedef AtomProp AtomTemplate;
 
     enum {
 	HYDROGEN = 1,
@@ -137,6 +150,14 @@
 	UNUNSEPTIUM,
 	UNUNOCTIUM
 };
+
+    const AtomTemplate THydrogen{
+        HYDROGEN,
+        1,
+        1,
+        1
+    };
+
 
 enum{
     MAIN_MENU = 0,

@@ -23,10 +23,11 @@ class SimulAtomMain : public CEvent {
         SDL_Surface*    atomIcon;
 
         Button          menuButtons[NUM_MENU_BUTTONS];
-        Atom*           atoms[32];
+        Atom*           atoms[MAX_ATOMS];
         int             gameState;
 
         void            setAtomDemo();
+        bool            checkCollision(int xA, int yA, int xB, int yB);
     public:
         SimulAtomMain();
 
