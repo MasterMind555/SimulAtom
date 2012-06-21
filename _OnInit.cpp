@@ -3,10 +3,10 @@
 #include "Constants.h"
 
 bool SimulAtomMain::OnInit() {
+
     //Redirects stdout and stderr output to the debug console
     freopen("CON", "w", stdout);
     freopen("CON", "w", stderr);
-
 
 
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -44,6 +44,10 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
+    if((moleculeIcon = CSurface::OnLoadPng("img/h2.png")) == NULL) {
+        printf("Can't find atom icon");
+        return false;
+    }
 
     menuButtons[PLAY_BUTTON].setIcon(&playIcon);
     menuButtons[EXIT_BUTTON].setIcon(&exitIcon);

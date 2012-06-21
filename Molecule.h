@@ -16,7 +16,7 @@
 
 class Molecule{
     public:
-                        Molecule(Atom components[]);
+                        Molecule(Atom* components, int size);
         int             getPosX();
         int             getPosY();
         void            setPosX(int val);
@@ -25,10 +25,18 @@ class Molecule{
         int             getTemperature();
         void            setTemperature(int val);
 
+        void            move();
+
     private:
         int             posX;
         int             posY;
-        Atom*           atoms[];
+
+        int             velX;
+        int             velY;
+
+        Atom*           atoms;
+        int             numAtoms;
+
         int             temperature;
 
 

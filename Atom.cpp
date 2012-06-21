@@ -13,6 +13,14 @@ Atom::Atom(int x, int y, int numProtons, int numNeutrons){
     velY = 0;
 }
 
+Atom::Atom(){
+
+    temperature = 295;
+    velX = 0;
+    velY = 0;
+
+}
+
 int Atom::getPosX(){
     return posX;
 }
@@ -88,19 +96,20 @@ void Atom::move(){
     wiggleY = ((rand() % 3) - 1)*(temperature / 50);
 
 
-    if(posX + velX < 0 || posX + velX > SCREEN_WIDTH - 20){//Minus 20 because of the offset of the texture ( Which is 20x20 )
+
+    if(posX + velX < 0 || posX + velX > SCREEN_WIDTH - ATOM_ICON_WIDTH){//Minus 20 because of the offset of the texture ( Which is 20x20 )
         velX *= -1;
     }
 
-    if(posY + velY < 0 || posY + velY > SCREEN_HEIGHT - 20){
+    if(posY + velY < 0 || posY + velY > SCREEN_HEIGHT - ATOM_ICON_HEIGHT){
         velY *= -1;
     }
 
-    if(posX + wiggleX < 0 || posX + wiggleX > SCREEN_WIDTH - 20){//Minus 20 because of the offset of the texture ( Which is 20x20 )
+    if(posX + wiggleX < 0 || posX + wiggleX > SCREEN_WIDTH - ATOM_ICON_WIDTH){//Minus 20 because of the offset of the texture ( Which is 20x20 )
         wiggleX *= -1;
     }
 
-    if(posY + wiggleY < 0 || posY + wiggleY > SCREEN_HEIGHT - 20){
+    if(posY + wiggleY < 0 || posY + wiggleY > SCREEN_HEIGHT - ATOM_ICON_HEIGHT){
         wiggleY *= -1;
     }
 

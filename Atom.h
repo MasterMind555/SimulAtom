@@ -1,6 +1,7 @@
 #ifndef ATOM_H_INCLUDED
 #define ATOM_H_INCLUDED
 
+
 /*
     Atom template class.
 
@@ -19,6 +20,7 @@
 class Atom{
 
     public:
+                        Atom();
                         Atom(int x, int y, int numProtons, int numNeutrons);
         int             getPosX();
         int             getPosY();

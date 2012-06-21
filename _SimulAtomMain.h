@@ -20,6 +20,9 @@
 #include "Button.h"
 #include "Atom.h"
 
+#include "Atom.h"
+#include "Molecule.h"
+
 class SimulAtomMain : public CEvent {
 
     private:
@@ -34,11 +37,16 @@ class SimulAtomMain : public CEvent {
 
         SDL_Surface*    atomIcon;
 
+        SDL_Surface*    moleculeIcon;
+
         Button          menuButtons[NUM_MENU_BUTTONS];
-        Atom*           atoms[32];
+
+        Atom*           atoms[MAX_ATOMS];
+        Molecule*       molecules[MAX_MOLECULES];
         int             gameState;
 
         void            setAtomDemo();
+        bool            checkCollision(int xA, int yA, int xB, int yB);
 
     public:
         SimulAtomMain();

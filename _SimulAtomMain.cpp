@@ -12,15 +12,20 @@ SimulAtomMain::SimulAtomMain() {
     atomIcon = NULL;
 
     int i;
-    for(i = 0; i < 32; i++)
+
+    for(i = 0; i < MAX_ATOMS; i++)
         atoms[i] = NULL;
+
+    for(i = 0; i < MAX_MOLECULES; i++)
+        molecules[i] = NULL;
+
 
 
     Running = true;
     gameState = MAIN_MENU;
 
-    //Sets the play and exit button's position and size
 
+    //Sets the play and exit button's position and size
     menuButtons[EXIT_BUTTON].setWidth(119);
     menuButtons[EXIT_BUTTON].setHeight(50);
     menuButtons[EXIT_BUTTON].setX(100);
@@ -69,7 +74,10 @@ int main(int argc, char* argv[]) {
 }
 
 void SimulAtomMain::setAtomDemo(){
-    atoms[0] = new Atom(50, 40, 1, 1);
+    int i;
+    for(i = 0; i < MAX_ATOMS; i++)
+            atoms[i] = new Atom(rand() % SCREEN_WIDTH - ATOM_ICON_WIDTH, rand() % SCREEN_HEIGHT - ATOM_ICON_HEIGHT, 1, 1);
+
 
 }
 

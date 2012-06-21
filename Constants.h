@@ -21,14 +21,28 @@
     const int SA_LOGO_WIDTH = 566;
     const int SA_LOGO_HEIGHT = 439;
 
+
     //How many buttons we have in the menu
+
+    const int ATOM_ICON_WIDTH = 20;
+    const int ATOM_ICON_HEIGHT = 20;
+
+    const int MOLECULE_ICON_WIDTH = 20;
+    const int MOLECULE_ICON_HEIGHT = 20;
+
     const int NUM_MENU_BUTTONS = 2;
+
+    const int MAX_FPS = 60;
+
+    const int MAX_ATOMS = 256;
+    const int MAX_MOLECULES = 128;
 
     //The order of the buttons
     enum {
         EXIT_BUTTON = 0,
         PLAY_BUTTON
     };
+
 
     //The possible states of the game
     enum{
@@ -37,6 +51,18 @@
     };
 
     //All the elements of the periodic table
+
+    struct AtomProp {
+
+        int protons;
+        int neutrons;
+        int oxydationNumber;
+        int valenceElectrons;
+
+    };
+    typedef AtomProp AtomTemplate;
+
+
     enum {
 	HYDROGEN = 1,
 	HELIUM,
@@ -157,5 +183,12 @@
 	UNUNSEPTIUM,
 	UNUNOCTIUM
 };
+
+    const AtomTemplate THydrogen{
+        HYDROGEN,
+        1,
+        1,
+        1
+    };
 
 #endif // CONSTANTS_H_INCLUDED
