@@ -29,15 +29,14 @@ void SimulAtomMain::OnLoop() {
                     if(atoms[i]->getOxyNumber() > 512 && atoms[e]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
                     {
                         checkReaction(i, e, true);
+                        break;
                     }
                     if(atoms[e]->getOxyNumber() > 512 && atoms[i]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
                     {
                         checkReaction(i, e, false);
+                        break;
                     }
-
-
                 }
-
             }
 
     for(i = 0; i < molecules.size(); i++)
@@ -94,7 +93,7 @@ void SimulAtomMain::createMolecule(int i, int numI, int e, int numE)
     reactives[1] = *atoms[e];
 
     molecules.push_back(new Molecule(reactives, 2));
-
+    printf("i: %d e: %d \n", i, e);
     if(i > e)//Prevents us from deleting the wrong class, since the indexing change when we delete an element
     {
         atoms.erase(atoms.begin() + i);
