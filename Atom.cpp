@@ -1,13 +1,14 @@
 #include "Atom.h"
 
-Atom::Atom(int x, int y, int numProtons, int numNeutrons){
+Atom::Atom(int x, int y, int numProtons, int numNeutrons, int oxydationNum){
 
     posX = x;
     posY = y;
     protons = numProtons;
     neutrons = numNeutrons;
-    temperature = 295;
+    oxydationNumber = oxydationNum;
 
+    temperature = 295;
     velX = 0;
     velY = 0;
 }
@@ -17,6 +18,7 @@ Atom::Atom(AtomTemplate properties, int x, int y){
     posY = y;
     protons = properties.protons;
     neutrons = properties.neutrons;
+    oxydationNumber = properties.oxydationNumber;
     temperature = 295;
 
     velX = 0;
@@ -89,6 +91,14 @@ int Atom::getTemperature(){
 
 void Atom::setTemperature(int val){
     temperature = val;
+}
+
+int Atom::getOxyNumber(){
+    return oxydationNumber;
+}
+
+void Atom::setOxyNumber(int val){
+    oxydationNumber = val;
 }
 
 /*

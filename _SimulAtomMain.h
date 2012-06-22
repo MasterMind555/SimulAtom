@@ -33,7 +33,8 @@ class SimulAtomMain : public CEvent {
 
         void            setAtomDemo();
         bool            checkCollision(int xA, int yA, int xB, int yB);
-
+        void            createMolecule(int i, int numI, int e, int numE);
+        void            checkReaction(int positive, int negative, bool posIsI);
         /*
             Switches of Simulation
         */

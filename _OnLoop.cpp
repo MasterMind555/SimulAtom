@@ -26,26 +26,17 @@ void SimulAtomMain::OnLoop() {
                     {
                         if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
                         {
-                            int y;
-                            for(y = 0; y < MAX_MOLECULES; y++)
-                                if(molecules[y] == NULL)
-                                {
+                            //Only 2 atoms collision for now
+                            if(atoms[i]->getOxyNumber() > 512 && atoms[e]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
+                            {
+                                checkReaction(i, e, true);
+                            }
+                            if(atoms[e]->getOxyNumber() > 512 && atoms[i]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
+                            {
+                                checkReaction(i, e, false);
+                            }
 
-                                    Atom reactives[2];
 
-                                    reactives[0] = *atoms[i];
-                                    reactives[1] = *atoms[e];
-
-                                    molecules[y] = new Molecule(reactives, 2);
-
-                                    break;
-                                }
-
-                            free(atoms[i]);
-                            atoms[i] = NULL;
-                            free(atoms[e]);
-                            atoms[e] = NULL;
-                            break;
                         }
 
                     }
@@ -96,4 +87,58 @@ bool SimulAtomMain::checkCollision(int xA, int yA, int xB, int yB ){
     }
 
     return true;
+}
+
+void SimulAtomMain::createMolecule(int i, int numI, int e, int numE)
+{
+    int y;
+    for(y = 0; y < MAX_MOLECULES; y++)
+        if(molecules[y] == NULL)
+        {
+
+            Atom reactives[numI + numE];
+
+            reactives[0] = *atoms[i];
+            reactives[1] = *atoms[e];
+
+            molecules[y] = new Molecule(reactives, 2);
+
+            break;
+        }
+
+    free(atoms[i]);
+    atoms[i] = NULL;
+    free(atoms[e]);
+    atoms[e] = NULL;
+}
+
+void SimulAtomMain::checkReaction(int i, int e, bool posIsI)
+{
+    bool bigIsI = false;
+    int big = 0;
+    int small = 0;
+    int iOx = atoms[i]->getOxyNumber();
+    int eOx = atoms[e]->getOxyNumber();
+    if(posIsI)
+    {
+        bigIsI = atoms[i]->getOxyNumber() > eOx * -1 ? true : false;
+        big =  iOx > eOx * -1 ? iOx : eOx * -1;
+        small =  iOx < eOx * -1 ? iOx : eOx * -1;
+    }
+    else
+    {
+        bigIsI = iOx * -1 > eOx  ? true : false;
+        big =  iOx* -1 > eOx  ? iOx * -1 : eOx;
+        small =  iOx * -1 < eOx ? iOx * -1 : eOx;
+    }
+
+
+    if(big % small == 0)
+    {
+        createMolecule(i,
+                       bigIsI ?  1 : big / small,
+                       e,
+                       bigIsI ?  big / small : 1);
+    }
+
 }
