@@ -17,8 +17,8 @@
 
     const int MAX_FPS = 60;
 
-    const int MAX_ATOMS = 256;
-    const int MAX_MOLECULES = 128;
+    const int MAX_ATOMS = 2048;
+    const int MAX_MOLECULES = 1024;
 
     //The order of the buttons
     enum {

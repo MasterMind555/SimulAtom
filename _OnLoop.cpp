@@ -16,41 +16,36 @@ void SimulAtomMain::OnLoop() {
     int i, e;
 
     //count1 = SDL_GetTicks();
-    for(i = 0; i < MAX_ATOMS; i++)
-        if(atoms[i] != NULL)
-            {
+    for(i = 0; i < atoms.size(); i++)
                 atoms[i]->move();
 
-                for(e = 0; e < MAX_ATOMS; e++)
-                    if(atoms[e] != NULL && e != i)
-                    {
-                        if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
-                        {
-                            //Only 2 atoms collision for now
-                            if(atoms[i]->getOxyNumber() > 512 && atoms[e]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
-                            {
-                                checkReaction(i, e, true);
-                            }
-                            if(atoms[e]->getOxyNumber() > 512 && atoms[i]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
-                            {
-                                checkReaction(i, e, false);
-                            }
-
-
-                        }
-
-                    }
-            }
-
-    for(i = 0; i < MAX_MOLECULES; i++)
-        if(molecules[i] != NULL)
+    for(i = 0; i < atoms.size(); i++)
+        for(e = 0; e < atoms.size(); e++)
+            if(e != i)
             {
-                molecules[i]->move();
+                if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
+                {
+                    //Only 2 atoms collision for now
+                    if(atoms[i]->getOxyNumber() > 512 && atoms[e]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
+                    {
+                        checkReaction(i, e, true);
+                        break;
+                    }
+                    if(atoms[e]->getOxyNumber() > 512 && atoms[i]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
+                    {
+                        checkReaction(i, e, false);
+                        break;
+                    }
+                }
             }
+
+    for(i = 0; i < molecules.size(); i++)
+                molecules[i]->move();
+
 
         //count2 = SDL_GetTicks();
         //printf("%d \n", count2 - count1);
-    }
+
 
     fpsFrames++;
     fpsLastUpdateTime = fpsCurrentTime;
@@ -58,9 +53,10 @@ void SimulAtomMain::OnLoop() {
     fpsElapsedTime = fpsCurrentTime - fpsLastUpdateTime;
 
     int waitTime = (int)((1000/MAX_FPS) - fpsElapsedTime);
-    /*
+
     if(waitTime > 0)
-        SDL_Delay(waitTime);*/
+        SDL_Delay(waitTime);
+    }
 
 }
 
@@ -91,25 +87,24 @@ bool SimulAtomMain::checkCollision(int xA, int yA, int xB, int yB ){
 
 void SimulAtomMain::createMolecule(int i, int numI, int e, int numE)
 {
-    int y;
-    for(y = 0; y < MAX_MOLECULES; y++)
-        if(molecules[y] == NULL)
-        {
+    Atom reactives[numI + numE];
 
-            Atom reactives[numI + numE];
+    reactives[0] = *atoms[i];
+    reactives[1] = *atoms[e];
 
-            reactives[0] = *atoms[i];
-            reactives[1] = *atoms[e];
+    molecules.push_back(new Molecule(reactives, 2));
+    printf("i: %d e: %d \n", i, e);
+    if(i > e)//Prevents us from deleting the wrong class, since the indexing change when we delete an element
+    {
+        atoms.erase(atoms.begin() + i);
+        atoms.erase(atoms.begin() + e);
+    }
+    else
+    {
+        atoms.erase(atoms.begin() + e);
+        atoms.erase(atoms.begin() + i);
+    }
 
-            molecules[y] = new Molecule(reactives, 2);
-
-            break;
-        }
-
-    free(atoms[i]);
-    atoms[i] = NULL;
-    free(atoms[e]);
-    atoms[e] = NULL;
 }
 
 void SimulAtomMain::checkReaction(int i, int e, bool posIsI)
