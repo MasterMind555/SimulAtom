@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H_INCLUDED
     #define CONSTANTS_H_INCLUDED
 
+    #include <vector>
+
     const int SCREEN_WIDTH = 1024;
     const int SCREEN_HEIGHT = 768;
 
@@ -17,8 +19,8 @@
 
     const int MAX_FPS = 60;
 
-    const int MAX_ATOMS = 2048;
-    const int MAX_MOLECULES = 1024;
+    const int MAX_ATOMS = 256;
+    const int MAX_MOLECULES = 128;
 
     //The order of the buttons
     enum {
@@ -57,9 +59,9 @@
     typedef AtomProp AtomTemplate;
 
     struct MoleculeProp {
-        AtomTemplate* atoms;
-        int size;
+        std::vector<AtomTemplate*> atoms;
     };
+
     typedef MoleculeProp MoleculeTemplate;
 
     enum {
@@ -183,25 +185,30 @@
 	UNUNOCTIUM
 };
 
-    const AtomTemplate THydrogen{
+    const AtomTemplate THydrogen {
         HYDROGEN,
         1,
         MINUS_ONE + PLUS_ONE,
         1
     };
 
-    const AtomTemplate THelium{
+    const AtomTemplate THelium {
         HELIUM,
         2,
         ZERO,
         2
     };
 
-    const AtomTemplate TLithium{
+    const AtomTemplate TLithium {
         LITHIUM,
         7,
         PLUS_ONE,
         1
+    };
+
+
+    const MoleculeTemplate TDihydrogen{
+
     };
 
 enum{

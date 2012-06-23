@@ -93,7 +93,7 @@ void SimulAtomMain::createMolecule(int i, int numI, int e, int numE)
     reactives[1] = *atoms[e];
 
     molecules.push_back(new Molecule(reactives, 2));
-    printf("i: %d e: %d \n", i, e);
+
     if(i > e)//Prevents us from deleting the wrong class, since the indexing change when we delete an element
     {
         atoms.erase(atoms.begin() + i);
