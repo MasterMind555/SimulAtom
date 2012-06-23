@@ -14,6 +14,8 @@
 
 
 #include <SDL.h>
+#include <vector>
+
 #include "CEvent.h"
 #include "CSurface.h"
 #include "Constants.h"
@@ -41,12 +43,21 @@ class SimulAtomMain : public CEvent {
 
         Button          menuButtons[NUM_MENU_BUTTONS];
 
-        Atom*           atoms[MAX_ATOMS];
-        Molecule*       molecules[MAX_MOLECULES];
+        std::vector<Atom*>          atoms;
+        std::vector<Molecule*>      molecules;
+
         int             gameState;
 
         void            setAtomDemo();
         bool            checkCollision(int xA, int yA, int xB, int yB);
+
+        void            createMolecule(int i, int numI, int e, int numE);
+        void            checkReaction(int positive, int negative, bool posIsI);
+        /*
+            Switches of Simulation
+        */
+
+        bool            preciseCollision;
 
     public:
         SimulAtomMain();

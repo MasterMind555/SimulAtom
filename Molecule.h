@@ -13,6 +13,7 @@
 */
 
 #include "Atom.h"
+#include <vector>
 
 class Molecule{
     public:
@@ -34,8 +35,8 @@ class Molecule{
         int             velX;
         int             velY;
 
-        Atom*           atoms;
-        int             numAtoms;
+        std::vector<Atom*>      atoms;
+
 
         int             temperature;
 

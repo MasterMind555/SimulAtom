@@ -4,27 +4,25 @@
 
 Molecule::Molecule(Atom* components, int size){
 
-
-    atoms = components;//Sets the 'atoms' variables to the given components
-    posX = atoms[0].getPosX();//Gets the atom's position from its first component
-    posY = atoms[0].getPosY();
-
     velX = 0;
     velY = 0;
 
-    numAtoms = size;
+    int i;
+    for(i = 0; i < size; i++)
+        atoms.push_back(&components[i]);
 
-    atoms = components;
+
+    posX = atoms[0]->getPosX();
+    posY = atoms[0]->getPosY();
 
     int temp = 0;
-    int i;
-    for(i = 0; i < numAtoms; i++)
+    for(i = 0; i < size; i++)
     {
         temp += components[i].getTemperature();
     }
 
     if(temp > 0)
-        temp = temp /  numAtoms;
+        temp = temp /  size;
 
     temperature = temp;
 

@@ -20,8 +20,9 @@
 class Atom{
 
     public:
+                        Atom(AtomTemplate properties, int x, int y);
                         Atom();
-                        Atom(int x, int y, int numProtons, int numNeutrons);
+                        Atom(int x, int y, int numProtons, int numNeutrons, int oxydationNum);
         int             getPosX();
         int             getPosY();
 
@@ -43,6 +44,9 @@ class Atom{
         int             getTemperature();
         void            setTemperature(int val);
 
+        int             getOxyNumber();
+        void            setOxyNumber(int val);
+
         bool            getBonded();
         //void          setBonded(bool val);
 
@@ -58,6 +62,7 @@ class Atom{
         int             neutrons;
         bool            bonded;
         int             temperature;
+        int             oxydationNumber;
 
 
 };
