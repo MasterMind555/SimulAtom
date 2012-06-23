@@ -37,7 +37,9 @@ class SimulAtomMain : public CEvent {
         SDL_Surface*    playIcon;
         SDL_Surface*    exitIcon;
 
-        SDL_Surface*    atomIcon;
+        std::vector<SDL_Surface*> atomIcons;
+
+        SDL_Surface*    atomIconTemplate;
 
         SDL_Surface*    moleculeIcon;
 

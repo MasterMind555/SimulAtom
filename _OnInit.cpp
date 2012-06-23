@@ -39,7 +39,7 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
-    if((atomIcon = CSurface::OnLoadPng("img/atom_red.png")) == NULL) {
+    if((atomIconTemplate = CSurface::OnLoadPng("img/atom_red.png")) == NULL) {
         printf("Can't find atom icon");
         return false;
     }

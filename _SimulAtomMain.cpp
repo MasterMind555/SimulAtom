@@ -9,7 +9,7 @@ SimulAtomMain::SimulAtomMain() {
     background = NULL;
     playIcon = NULL;
     exitIcon = NULL;
-    atomIcon = NULL;
+    atomIconTemplate = NULL;
 
     preciseCollision = false;
 

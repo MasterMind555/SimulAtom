@@ -235,10 +235,39 @@
 
     const AtomTemplate TLithium {
         LITHIUM,
-        7,
+        4,
         PLUS_ONE,
         1
     };
+
+    const AtomTemplate TBeryllium {
+        BERYLLIUM,
+        5,
+        PLUS_TWO,
+        2
+    };
+
+    const AtomTemplate TBoron {
+        BORON,
+        6,
+        PLUS_THREE,
+        3
+    };
+
+    const AtomTemplate TCarbon {
+        CARBON,
+        6,
+        PLUS_FOUR,
+        2
+    };
+
+    const AtomTemplate TNitrogen{
+        NITROGEN,
+        7,
+        PLUS_FIVE + MINUS_THREE,
+        2
+    };
+
 
 
     const MoleculeTemplate TDihydrogen{
