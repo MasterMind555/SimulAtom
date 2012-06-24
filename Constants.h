@@ -263,7 +263,68 @@
         2
     };
 
+    const AtomTemplate TOxygen {
+        OXYGEN,
+        8,
+        MINUS_TWO + PLUS_TWO,//Not sure if correct or the engine requires that at this state
+        6
+    };
 
+    const AtomTemplate TFluorine {
+        FLUORINE,
+        10,
+        MINUS_ONE,
+        7
+    };
+
+    const AtomTemplate TNeon {
+        NEON,
+        10,
+        ZERO,
+        8
+    };
+
+    const AtomTemplate TSodium {
+        SODIUM,
+        10,
+        PLUS_ONE,
+        1
+    };
+
+    const AtomTemplate TMagnesium {
+        MAGNESIUM,
+        12,
+        PLUS_TWO,
+        2
+    };
+
+    const AtomTemplate TAluminum {
+		ALUMINUM,
+		14,
+		PLUS_THREE,
+		3
+	};
+
+    const AtomTemplate TSilicon {
+		SILICON,
+		14,
+		PLUS_FOUR,
+		4
+	};
+
+	const AtomTemplate TPhosphorus {
+		PHOSPHORUS,
+		16,
+		PLUS_FIVE,
+		5
+	};
+
+	const AtomTemplate TSulfur {
+		SULFUR,
+		16,
+		PLUS_SIX + PLUS_FOUR + MINUS_TWO,
+		6
+	};
 
     const MoleculeTemplate TDihydrogen{
 
