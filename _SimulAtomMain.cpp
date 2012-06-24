@@ -13,7 +13,6 @@ SimulAtomMain::SimulAtomMain() {
 
     preciseCollision = false;
 
-
     Running = true;
     gameState = MAIN_MENU;
 

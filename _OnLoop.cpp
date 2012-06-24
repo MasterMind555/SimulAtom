@@ -128,13 +128,21 @@ void SimulAtomMain::checkReaction(int i, int e, bool posIsI)
         small =  iOx * -1 < eOx ? iOx * -1 : eOx;
     }
 
-
-    if(big % small == 0)
+    bool found = false;
+    int u, o;
+    for(u = 1; u < 9; u++)
     {
-        createMolecule(i,
-                       bigIsI ?  1 : big / small,
-                       e,
-                       bigIsI ?  big / small : 1);
+        if(!found)
+            for(o = 1; o < 9; o++)
+                if((big * u % small * o)== 0)
+                {
+                    createMolecule(i,
+                                   bigIsI ?  u : big * u / small * o,
+                                   e,
+                                   bigIsI ?  big * u / small * o : o);
+                    found = true;
+                    break;
+                }
     }
 
 }

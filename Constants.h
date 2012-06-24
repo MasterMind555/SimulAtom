@@ -48,8 +48,6 @@
         PLAY_BUTTON
     };
 
-
-
     //The possible states of the game
     enum{
         MAIN_MENU = 0,
@@ -57,7 +55,6 @@
     };
 
     //All the elements of the periodic table
-
     enum {
         MINUS_EIGHT = 1,
         MINUS_SEVEN = 2,
@@ -86,14 +83,12 @@
         int valenceElectrons;
 
     };
-
     typedef AtomProp AtomTemplate;
 
 
     struct MoleculeProp {
         std::vector<AtomTemplate*> atoms;
     };
-
     typedef MoleculeProp MoleculeTemplate;
 
 
