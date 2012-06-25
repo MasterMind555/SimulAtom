@@ -1,6 +1,6 @@
 #include "Atom.h"
 
-Atom::Atom(int x, int y, int numProtons, int numNeutrons, int oxydationNum){
+Atom::Atom(int x, int y, int numProtons, int numNeutrons, int oxydationNum, float valEn){
 
     //Initializes a new Atom of given type with the given coordinates at 0K
     posX = x;
@@ -8,6 +8,7 @@ Atom::Atom(int x, int y, int numProtons, int numNeutrons, int oxydationNum){
     protons = numProtons;
     neutrons = numNeutrons;
     oxydationNumber = oxydationNum;
+    en = valEn;
 
     temperature = 295;
     velX = 0;
@@ -20,6 +21,7 @@ Atom::Atom(AtomTemplate properties, int x, int y){
     protons = properties.protons;
     neutrons = properties.neutrons;
     oxydationNumber = properties.oxydationNumber;
+    en = properties.en;
     temperature = 295;
 
     velX = 0;
@@ -107,6 +109,15 @@ void setBonded(bool val){
 
 }
 */
+
+float Atom::getEn(){
+    return en;
+}
+
+void Atom::setEn(float val){
+    en = val;
+}
+
 
 void Atom::move(){
 

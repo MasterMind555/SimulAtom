@@ -22,7 +22,7 @@ class Atom{
     public:
                         Atom(AtomTemplate properties, int x, int y);
                         Atom();
-                        Atom(int x, int y, int numProtons, int numNeutrons, int oxydationNum);
+                        Atom(int x, int y, int numProtons, int numNeutrons, int oxydationNum, float valEn);
         int             getPosX();
         int             getPosY();
 
@@ -47,6 +47,9 @@ class Atom{
         int             getOxyNumber();
         void            setOxyNumber(int val);
 
+        float           getEn();
+        void            setEn(float val);
+
         bool            getBonded();
         //void          setBonded(bool val);
 
@@ -63,7 +66,7 @@ class Atom{
         bool            bonded;
         int             temperature;
         int             oxydationNumber;
-
+        float           en;//Electronegativity
 
 };
 

@@ -110,39 +110,67 @@ void SimulAtomMain::createMolecule(int i, int numI, int e, int numE)
 
 void SimulAtomMain::checkReaction(int i, int e, bool posIsI)
 {
+    float dif = atoms[i]->getEn() - atoms[e]->getEn();
+    if(dif < 0)
+        dif *= -1;
+
+    if(dif < 0.5)
+        bNonPolarCovalent(i, e, posIsI);
+    else if(dif < 1.6)
+        bPolarCovalent(i, e, posIsI);
+    else if(dif < 2.0)
+    {
+        printf("Need to know if atoms are metals or not");
+    }
+    else if(dif > 2.0)
+        bIonic(i, e, posIsI);
+
+}
+
+void SimulAtomMain::bNonPolarCovalent(int i, int e, bool posIsI){
     bool bigIsI = false;
     int big = 0;
     int small = 0;
     int iOx = atoms[i]->getOxyNumber();
     int eOx = atoms[e]->getOxyNumber();
-    if(posIsI)
+
+    if(posIsI)//If I is positive and E is negative
     {
-        bigIsI = atoms[i]->getOxyNumber() > eOx * -1 ? true : false;
-        big =  iOx > eOx * -1 ? iOx : eOx * -1;
-        small =  iOx < eOx * -1 ? iOx : eOx * -1;
+        bigIsI = iOx > eOx * -1 ? true : false;//Checks if the biggest number ( Without counting the negative ) is I
+        big =  bigIsI ? iOx : eOx * -1;//Assigns the biggest number to the variable big
+        small =  !bigIsI ? iOx : eOx * -1;
     }
     else
     {
         bigIsI = iOx * -1 > eOx  ? true : false;
-        big =  iOx* -1 > eOx  ? iOx * -1 : eOx;
-        small =  iOx * -1 < eOx ? iOx * -1 : eOx;
+        big =  bigIsI  ? iOx * -1 : eOx;
+        small =  !bigIsI ? iOx * -1 : eOx;
     }
+
 
     bool found = false;
     int u, o;
-    for(u = 1; u < 9; u++)
+    for(u = 1; u < 9; u++)//For a good amount of atoms 1
     {
         if(!found)
-            for(o = 1; o < 9; o++)
-                if((big * u % small * o)== 0)
+            for(o = 1; o < 9; o++)//For a good amount of atoms 2
+                if((big * u % small * o)== 0)//If those numbers will be equal
                 {
                     createMolecule(i,
                                    bigIsI ?  u : big * u / small * o,
                                    e,
-                                   bigIsI ?  big * u / small * o : o);
+                                   bigIsI ?  big * u / small * o : o);//Make a molecule
                     found = true;
                     break;
                 }
     }
+}
+
+
+void SimulAtomMain::bPolarCovalent(int i, int e, bool posIsI){
+
+}
+
+void SimulAtomMain::bIonic(int i, int e, bool posIsI){
 
 }

@@ -55,6 +55,11 @@ class SimulAtomMain : public CEvent {
 
         void            createMolecule(int i, int numI, int e, int numE);
         void            checkReaction(int positive, int negative, bool posIsI);
+
+        void            bNonPolarCovalent(int i, int e, bool posIsI);
+        void            bPolarCovalent(int i, int e, bool posIsI);
+        void            bIonic(int i, int e, bool posIsI);
+
         /*
             Switches of Simulation
         */
