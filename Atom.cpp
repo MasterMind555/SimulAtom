@@ -1,16 +1,39 @@
 #include "Atom.h"
 
-Atom::Atom(int x, int y, int numProtons, int numNeutrons){
+Atom::Atom(int x, int y, int numProtons, int numNeutrons, int oxydationNum, float valEn){
 
     //Initializes a new Atom of given type with the given coordinates at 0K
     posX = x;
     posY = y;
     protons = numProtons;
     neutrons = numNeutrons;
+    oxydationNumber = oxydationNum;
+    en = valEn;
+
+    temperature = 295;
+    velX = 0;
+    velY = 0;
+}
+
+Atom::Atom(AtomTemplate properties, int x, int y){
+    posX = x;
+    posY = y;
+    protons = properties.protons;
+    neutrons = properties.neutrons;
+    oxydationNumber = properties.oxydationNumber;
+    en = properties.en;
     temperature = 295;
 
     velX = 0;
     velY = 0;
+}
+
+Atom::Atom(){
+
+    temperature = 295;
+    velX = 0;
+    velY = 0;
+
 }
 
 int Atom::getPosX(){
@@ -73,11 +96,28 @@ void Atom::setTemperature(int val){
     temperature = val;
 }
 
+int Atom::getOxyNumber(){
+    return oxydationNumber;
+}
+
+void Atom::setOxyNumber(int val){
+    oxydationNumber = val;
+}
+
 /*
 void setBonded(bool val){
 
 }
 */
+
+float Atom::getEn(){
+    return en;
+}
+
+void Atom::setEn(float val){
+    en = val;
+}
+
 
 void Atom::move(){
 
@@ -88,19 +128,20 @@ void Atom::move(){
     wiggleY = ((rand() % 3) - 1)*(temperature / 50);
 
 
-    if(posX + velX < 0 || posX + velX > SCREEN_WIDTH - 20){//Minus 20 because of the offset of the texture ( Which is 20x20 )
+
+    if(posX + velX < 0 || posX + velX > SCREEN_WIDTH - ATOM_ICON_WIDTH){//Minus 20 because of the offset of the texture ( Which is 20x20 )
         velX *= -1;
     }
 
-    if(posY + velY < 0 || posY + velY > SCREEN_HEIGHT - 20){
+    if(posY + velY < 0 || posY + velY > SCREEN_HEIGHT - ATOM_ICON_HEIGHT){
         velY *= -1;
     }
 
-    if(posX + wiggleX < 0 || posX + wiggleX > SCREEN_WIDTH - 20){//Minus 20 because of the offset of the texture ( Which is 20x20 )
+    if(posX + wiggleX < 0 || posX + wiggleX > SCREEN_WIDTH - ATOM_ICON_WIDTH){//Minus 20 because of the offset of the texture ( Which is 20x20 )
         wiggleX *= -1;
     }
 
-    if(posY + wiggleY < 0 || posY + wiggleY > SCREEN_HEIGHT - 20){
+    if(posY + wiggleY < 0 || posY + wiggleY > SCREEN_HEIGHT - ATOM_ICON_HEIGHT){
         wiggleY *= -1;
     }
 

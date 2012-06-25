@@ -1,6 +1,7 @@
 #ifndef ATOM_H_INCLUDED
 #define ATOM_H_INCLUDED
 
+
 /*
     Atom template class.
 
@@ -19,7 +20,9 @@
 class Atom{
 
     public:
-                        Atom(int x, int y, int numProtons, int numNeutrons);
+                        Atom(AtomTemplate properties, int x, int y);
+                        Atom();
+                        Atom(int x, int y, int numProtons, int numNeutrons, int oxydationNum, float valEn);
         int             getPosX();
         int             getPosY();
 
@@ -41,6 +44,12 @@ class Atom{
         int             getTemperature();
         void            setTemperature(int val);
 
+        int             getOxyNumber();
+        void            setOxyNumber(int val);
+
+        float           getEn();
+        void            setEn(float val);
+
         bool            getBonded();
         //void          setBonded(bool val);
 
@@ -56,7 +65,8 @@ class Atom{
         int             neutrons;
         bool            bonded;
         int             temperature;
-
+        int             oxydationNumber;
+        float           en;//Electronegativity
 
 };
 

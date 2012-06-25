@@ -6,6 +6,16 @@ void SimulAtomMain::OnCleanup() {
     free(background);
     free(playIcon);
     free(exitIcon);
-    free(atomIcon);
+    free(atomIconTemplate);
+    free(moleculeIcon);
+
+    int i;
+    for(i = 0; i < atoms.size(); i++)
+        delete(atoms[i]);
+    for(i = 0; i < molecules.size(); i++)
+        delete(molecules[i]);
+    atoms.clear();
+    molecules.clear();
+
     SDL_Quit();
 }

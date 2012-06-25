@@ -14,16 +14,25 @@
 
 
 #include <SDL.h>
+#include <vector>
+
 #include "CEvent.h"
 #include "CSurface.h"
 #include "Constants.h"
 #include "Button.h"
 #include "Atom.h"
 
+#include "Atom.h"
+#include "Molecule.h"
+
 class SimulAtomMain : public CEvent {
 
     private:
-        bool            Running;
+        bool            running;
+        bool            simulating;
+
+        int             selected;
+
         SDL_Surface*    screen;
 
         SDL_Surface*    background;
@@ -32,13 +41,34 @@ class SimulAtomMain : public CEvent {
         SDL_Surface*    playIcon;
         SDL_Surface*    exitIcon;
 
-        SDL_Surface*    atomIcon;
+        std::vector<SDL_Surface*> atomIcons;
+
+        SDL_Surface*    atomIconTemplate;
+
+        SDL_Surface*    moleculeIcon;
 
         Button          menuButtons[NUM_MENU_BUTTONS];
-        Atom*           atoms[32];
+
+        std::vector<Atom*>          atoms;
+        std::vector<Molecule*>      molecules;
+
         int             gameState;
 
         void            setAtomDemo();
+        bool            checkCollision(int xA, int yA, int xB, int yB);
+
+        void            createMolecule(int i, int numI, int e, int numE);
+        void            checkReaction(int positive, int negative, bool posIsI);
+
+        void            bNonPolarCovalent(int i, int e, bool posIsI);
+        void            bPolarCovalent(int i, int e, bool posIsI);
+        void            bIonic(int i, int e, bool posIsI);
+
+        /*
+            Switches of Simulation
+        */
+
+        bool            preciseCollision;
 
     public:
         SimulAtomMain();

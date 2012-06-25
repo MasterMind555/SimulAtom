@@ -9,18 +9,17 @@ SimulAtomMain::SimulAtomMain() {
     background = NULL;
     playIcon = NULL;
     exitIcon = NULL;
-    atomIcon = NULL;
+    atomIconTemplate = NULL;
+    preciseCollision = false;
 
-    int i;
-    for(i = 0; i < 32; i++)
-        atoms[i] = NULL;
+    selected = 1;
 
-
-    Running = true;
+    running = true;
+    simulating = true;
     gameState = MAIN_MENU;
 
-    //Sets the play and exit button's position and size
 
+    //Sets the play and exit button's position and size
     menuButtons[EXIT_BUTTON].setWidth(119);
     menuButtons[EXIT_BUTTON].setHeight(50);
     menuButtons[EXIT_BUTTON].setX(100);
@@ -35,7 +34,7 @@ SimulAtomMain::SimulAtomMain() {
     if(menuButtons[PLAY_BUTTON].checkIfValid() == false)
         printf("Problem while initializing the %dth button", PLAY_BUTTON);
 
-    setAtomDemo();
+    //setAtomDemo();
 
 }
 
@@ -46,7 +45,7 @@ int SimulAtomMain::OnExecute() {
 
     SDL_Event Event;
 
-    while(Running) {
+    while(running) {
 
         while(SDL_PollEvent(&Event)) {
             OnEvent(&Event);
@@ -69,7 +68,10 @@ int main(int argc, char* argv[]) {
 }
 
 void SimulAtomMain::setAtomDemo(){
-    atoms[0] = new Atom(50, 40, 1, 1);
+    int i;
+    for(i = 0; i < MAX_ATOMS; i++)
+            atoms.push_back(new Atom(THydrogen, rand() % SCREEN_WIDTH - ATOM_ICON_WIDTH, rand() % SCREEN_HEIGHT - ATOM_ICON_HEIGHT));
+
 
 }
 
@@ -79,18 +81,43 @@ void SimulAtomMain::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode){
     {
         if(sym == SDLK_ESCAPE)
             gameState = MAIN_MENU;
+        if(sym == SDLK_SPACE)
+            simulating = !simulating;
+        if(sym == SDLK_1)
+            selected = 1;
+        if(sym == SDLK_2)
+            selected = 2;
+        if(sym == SDLK_3)
+            selected = 3;
+        if(sym == SDLK_4)
+            selected = 5;
+        if(sym == SDLK_6)
+            selected = 6;
+        if(sym == SDLK_7)
+            selected = 7;
+        if(sym == SDLK_8)
+            selected = 8;
+        if(sym == SDLK_9)
+            selected = 9;
     }
 }
 
 void SimulAtomMain::OnLButtonDown(int mX, int mY){
 
-    if(menuButtons[EXIT_BUTTON].checkMouseClick(mX, mY, true))
+    if(gameState == MAIN_MENU)
     {
-        Running = false;
+        if(menuButtons[EXIT_BUTTON].checkMouseClick(mX, mY, true))
+        {
+            running = false;
+        }
+        else if(menuButtons[PLAY_BUTTON].checkMouseClick(mX, mY, true))
+        {
+            gameState = GAME_SCREEN;
+        }
     }
-    else if(menuButtons[PLAY_BUTTON].checkMouseClick(mX, mY, true))
+    else if(gameState == GAME_SCREEN)
     {
-        gameState = GAME_SCREEN;
+        atoms.push_back(new Atom(TAtoms[selected], mX, mY));
     }
 
 }
