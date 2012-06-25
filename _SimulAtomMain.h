@@ -31,6 +31,8 @@ class SimulAtomMain : public CEvent {
         bool            running;
         bool            simulating;
 
+        int             selected;
+
         SDL_Surface*    screen;
 
         SDL_Surface*    background;

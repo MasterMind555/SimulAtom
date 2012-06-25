@@ -261,7 +261,7 @@
         2.55
     };
 
-    const AtomTemplate TNitrogen{
+    const AtomTemplate TNitrogen {
         NITROGEN,
         7,
         PLUS_FIVE + MINUS_THREE,
@@ -340,6 +340,26 @@
 		6,
 		2.58
 	};
+
+    const AtomTemplate TAtoms[17] = {
+        THydrogen,
+        THydrogen,
+        THelium,
+        TLithium,
+        TBeryllium,
+        TBoron,
+        TCarbon,
+        TNitrogen,
+        TOxygen,
+        TFluorine,
+        TNeon,
+        TSodium,
+        TMagnesium,
+        TAluminum,
+        TSilicon,
+        TPhosphorus,
+        TSulfur
+    };
 
     const MoleculeTemplate TDihydrogen{
 

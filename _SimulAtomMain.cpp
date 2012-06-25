@@ -10,8 +10,9 @@ SimulAtomMain::SimulAtomMain() {
     playIcon = NULL;
     exitIcon = NULL;
     atomIconTemplate = NULL;
-
     preciseCollision = false;
+
+    selected = 1;
 
     running = true;
     simulating = true;
@@ -33,7 +34,7 @@ SimulAtomMain::SimulAtomMain() {
     if(menuButtons[PLAY_BUTTON].checkIfValid() == false)
         printf("Problem while initializing the %dth button", PLAY_BUTTON);
 
-    setAtomDemo();
+    //setAtomDemo();
 
 }
 
@@ -82,18 +83,41 @@ void SimulAtomMain::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode){
             gameState = MAIN_MENU;
         if(sym == SDLK_SPACE)
             simulating = !simulating;
+        if(sym == SDLK_1)
+            selected = 1;
+        if(sym == SDLK_2)
+            selected = 2;
+        if(sym == SDLK_3)
+            selected = 3;
+        if(sym == SDLK_4)
+            selected = 5;
+        if(sym == SDLK_6)
+            selected = 6;
+        if(sym == SDLK_7)
+            selected = 7;
+        if(sym == SDLK_8)
+            selected = 8;
+        if(sym == SDLK_9)
+            selected = 9;
     }
 }
 
 void SimulAtomMain::OnLButtonDown(int mX, int mY){
 
-    if(menuButtons[EXIT_BUTTON].checkMouseClick(mX, mY, true))
+    if(gameState == MAIN_MENU)
     {
-        running = false;
+        if(menuButtons[EXIT_BUTTON].checkMouseClick(mX, mY, true))
+        {
+            running = false;
+        }
+        else if(menuButtons[PLAY_BUTTON].checkMouseClick(mX, mY, true))
+        {
+            gameState = GAME_SCREEN;
+        }
     }
-    else if(menuButtons[PLAY_BUTTON].checkMouseClick(mX, mY, true))
+    else if(gameState == GAME_SCREEN)
     {
-        gameState = GAME_SCREEN;
+        atoms.push_back(new Atom(TAtoms[selected], mX, mY));
     }
 
 }
