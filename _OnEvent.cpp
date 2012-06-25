@@ -5,5 +5,5 @@ void SimulAtomMain::OnEvent(SDL_Event* Event) {
 }
 
 void SimulAtomMain::OnExit() {
-    Running = false;
+    running = false;
 }

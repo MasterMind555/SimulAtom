@@ -13,7 +13,8 @@ SimulAtomMain::SimulAtomMain() {
 
     preciseCollision = false;
 
-    Running = true;
+    running = true;
+    simulating = true;
     gameState = MAIN_MENU;
 
 
@@ -43,7 +44,7 @@ int SimulAtomMain::OnExecute() {
 
     SDL_Event Event;
 
-    while(Running) {
+    while(running) {
 
         while(SDL_PollEvent(&Event)) {
             OnEvent(&Event);
@@ -79,6 +80,8 @@ void SimulAtomMain::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode){
     {
         if(sym == SDLK_ESCAPE)
             gameState = MAIN_MENU;
+        if(sym == SDLK_SPACE)
+            simulating = !simulating;
     }
 }
 
@@ -86,7 +89,7 @@ void SimulAtomMain::OnLButtonDown(int mX, int mY){
 
     if(menuButtons[EXIT_BUTTON].checkMouseClick(mX, mY, true))
     {
-        Running = false;
+        running = false;
     }
     else if(menuButtons[PLAY_BUTTON].checkMouseClick(mX, mY, true))
     {

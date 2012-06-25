@@ -7,7 +7,6 @@ void SimulAtomMain::OnCleanup() {
     free(playIcon);
     free(exitIcon);
     free(atomIconTemplate);
-
     free(moleculeIcon);
 
     int i;
@@ -15,10 +14,8 @@ void SimulAtomMain::OnCleanup() {
         delete(atoms[i]);
     for(i = 0; i < molecules.size(); i++)
         delete(molecules[i]);
-
     atoms.clear();
     molecules.clear();
-
 
     SDL_Quit();
 }

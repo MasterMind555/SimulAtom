@@ -28,7 +28,9 @@
 class SimulAtomMain : public CEvent {
 
     private:
-        bool            Running;
+        bool            running;
+        bool            simulating;
+
         SDL_Surface*    screen;
 
         SDL_Surface*    background;

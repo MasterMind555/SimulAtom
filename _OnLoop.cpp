@@ -12,41 +12,43 @@ void SimulAtomMain::OnLoop() {
 
     if(gameState == GAME_SCREEN)
     {
+        if(simulating)
+        {
 
-    //int count1, count2;
-    int i, e;
+        //int count1, count2;
+        int i, e;
 
-    //count1 = SDL_GetTicks();
-    for(i = 0; i < atoms.size(); i++)
-                atoms[i]->move();
+        //count1 = SDL_GetTicks();
+        for(i = 0; i < atoms.size(); i++)
+                    atoms[i]->move();
 
-    for(i = 0; i < atoms.size(); i++)
-        for(e = 0; e < atoms.size(); e++)
-            if(e != i)
-            {
-                if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
+        for(i = 0; i < atoms.size(); i++)
+            for(e = 0; e < atoms.size(); e++)
+                if(e != i)
                 {
-                    //Only 2 atoms collision for now
-                    if(atoms[i]->getOxyNumber() > 512 && atoms[e]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
+                    if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
                     {
-                        checkReaction(i, e, true);
-                        break;
-                    }
-                    if(atoms[e]->getOxyNumber() > 512 && atoms[i]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
-                    {
-                        checkReaction(i, e, false);
-                        break;
+                        //Only 2 atoms collision for now
+                        if(atoms[i]->getOxyNumber() > 512 && atoms[e]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
+                        {
+                            checkReaction(i, e, true);
+                            break;
+                        }
+                        if(atoms[e]->getOxyNumber() > 512 && atoms[i]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
+                        {
+                            checkReaction(i, e, false);
+                            break;
+                        }
                     }
                 }
-            }
 
-    for(i = 0; i < molecules.size(); i++)
-                molecules[i]->move();
+        for(i = 0; i < molecules.size(); i++)
+                    molecules[i]->move();
 
 
-        //count2 = SDL_GetTicks();
-        //printf("%d \n", count2 - count1);
-
+            //count2 = SDL_GetTicks();
+            //printf("%d \n", count2 - count1);
+        }
 
     fpsFrames++;
     fpsLastUpdateTime = fpsCurrentTime;
