@@ -17,34 +17,32 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
-
-
-    if((saLogo = CSurface::OnLoadPng("img/logo.png")) == NULL) {
+    if((saLogo = CSurface::onLoadPng("img/logo.png")) == NULL) {
         printf("Can't find SimulAtom Logo");
         return false;
     }
 
-    if((background = CSurface::OnLoadPng("img/background.png")) == NULL) {
+    if((background = CSurface::onLoadPng("img/background.png")) == NULL) {
         printf("Can't find background");
         return false;
     }
 
-    if((playIcon = CSurface::OnLoadPng("img/play.png")) == NULL) {
+    if((playIcon = CSurface::onLoadPng("img/play.png")) == NULL) {
         printf("Can't find play icon");
         return false;
     }
 
-    if((exitIcon = CSurface::OnLoadPng("img/exit.png")) == NULL) {
+    if((exitIcon = CSurface::onLoadPng("img/exit.png")) == NULL) {
         printf("Can't find exit icon");
         return false;
     }
 
-    if((atomIconTemplate = CSurface::OnLoadPng("img/atom.png")) == NULL) {
+    if((atomIconTemplate = CSurface::onLoadPng("img/atom.png")) == NULL) {
         printf("Can't find atom icon");
         return false;
     }
 
-    if((moleculeIcon = CSurface::OnLoadPng("img/h2.png")) == NULL) {
+    if((moleculeIcon = CSurface::onLoadPng("img/h2.png")) == NULL) {
         printf("Can't find atom icon");
         return false;
     }
