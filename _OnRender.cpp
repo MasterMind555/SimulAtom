@@ -10,7 +10,7 @@ void SimulAtomMain::OnRender() {
         int i;
 
         for(i = 0; i < atoms.size(); i++)
-                CSurface::onDraw(screen, atomIconTemplate, atoms[i]->getPosX(), atoms[i]->getPosY());
+                CSurface::onDraw(screen, atomIcons[0], atoms[i]->getPosX(), atoms[i]->getPosY());
 
         for(i = 0; i < molecules.size(); i++)
                 CSurface::onDraw(screen, moleculeIcon, molecules[i]->getPosX(), molecules[i]->getPosY());

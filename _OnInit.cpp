@@ -47,6 +47,34 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
+    const bool h[6][5] = {
+        {1, 0, 0, 0, 1},
+        {1, 0, 0, 0, 1},
+        {1, 1, 1, 1, 1},
+        {1, 0, 0, 0, 1},
+        {1, 0, 0, 0, 1},
+        {1, 0, 0, 0, 1}
+    };
+
+    const bool he[6][11] = {
+        { 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0},
+        { 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1},
+        { 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0},
+        { 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0},
+        { 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0}
+    };
+
+    int i, e;
+
+    for(i = 0; i < 2; i++)
+        atomIcons.push_back(atomIconTemplate);
+
+    for(i = 0; i < 6; i++)
+        for(e = 0; e < 5; e++)
+            if(h[i][e])
+                CSurface::setPixel(atomIcons[0], ATOM_ICON_WIDTH / 2 - 3 + e, ATOM_ICON_HEIGHT / 2 - 2 + i, 0xFFFFFF);
+
     menuButtons[PLAY_BUTTON].setIcon(&playIcon);
     menuButtons[EXIT_BUTTON].setIcon(&exitIcon);
 
