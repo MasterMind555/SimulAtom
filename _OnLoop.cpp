@@ -145,9 +145,32 @@ void SimulAtomMain::bNonPolarCovalent(int i, int e){
 
 
 void SimulAtomMain::bPolarCovalent(int i, int e){
-
+    bNonPolarCovalent(i, e);
 }
 
 void SimulAtomMain::bIonic(int i, int e){
+    if((atoms[i]->getMetal() && atoms[e]->getMetal()) || (!atoms[i]->getMetal() && !atoms[e]->getMetal()))//If both are metal or none are metal
+        return;
 
+    int iOx = atoms[i]->getOxyNumber();
+    int eOx = atoms[e]->getOxyNumber();
+
+    if(iOx % 256 >= 32 && eOx % 65536 >= 8192)//If iOx has a negative value between -3 and -1 and eOx has a positive value between 5 and 7
+    {
+        if(iOx % 256 >= 128 && eOx % 65536 >= 32768)
+            createMolecule(i, 1, e, 1);
+        else if(iOx % 128 >= 64 && eOx % 32768 >= 16384)
+            createMolecule(i, 1, e, 1);
+        else if(iOx % 64 >= 32 && eOx % 16384 >= 8192)
+            createMolecule(i, 1, e, 1);
+    }
+    else if(eOx % 256 >= 32 && iOx % 65536 >= 8192)
+    {
+        if(eOx % 256 >= 128 && iOx % 65536 >= 32768)
+            createMolecule(i, 1, e, 1);
+        else if(eOx % 128 >= 64 && iOx % 32768 >= 16384)
+            createMolecule(i, 1, e, 1);
+        else if(eOx % 64 >= 32 && iOx % 16384 >= 8192)
+            createMolecule(i, 1, e, 1);
+    }
 }
