@@ -104,6 +104,14 @@ void Atom::setOxyNumber(int val){
     oxydationNumber = val;
 }
 
+bool Atom::getMetal(){
+    return metal;
+}
+
+void Atom::setMetal(bool val){
+    metal = val;
+}
+
 /*
 void setBonded(bool val){
 

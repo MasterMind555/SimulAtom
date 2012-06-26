@@ -79,6 +79,7 @@
         int oxydationNumber;
         int valenceElectrons;
         float en;//Electronegativity
+        bool metal;//TODO: use a enum here for the category
     };
 
     typedef AtomProp AtomTemplate;
@@ -217,7 +218,8 @@
         1,
         MINUS_ONE + PLUS_ONE,
         1,
-        2.20
+        2.20,
+        false
     };
 
 
@@ -226,7 +228,8 @@
         2,
         ZERO,
         2,
-        99 //Unknown, no reactions implying this anyways
+        99, //Unknown, no reactions implying this anyways
+        false
     };
 
     const AtomTemplate TLithium {
@@ -234,7 +237,8 @@
         4,
         PLUS_ONE,
         1,
-        0.98
+        0.98,
+        true
     };
 
     const AtomTemplate TBeryllium {
@@ -242,7 +246,8 @@
         5,
         PLUS_TWO,
         2,
-        1.57
+        1.57,
+        false
     };
 
     const AtomTemplate TBoron {
@@ -250,7 +255,8 @@
         6,
         PLUS_THREE,
         3,
-        2.04
+        2.04,
+        false
     };
 
     const AtomTemplate TCarbon {
@@ -258,7 +264,8 @@
         6,
         PLUS_FOUR,
         2,
-        2.55
+        2.55,
+        false
     };
 
     const AtomTemplate TNitrogen {
@@ -266,7 +273,8 @@
         7,
         PLUS_FIVE + MINUS_THREE,
         2,
-        3.04
+        3.04,
+        false
     };
 
     const AtomTemplate TOxygen {
@@ -274,7 +282,8 @@
         8,
         MINUS_TWO + PLUS_TWO,//Not sure if correct or the engine requires that at this state
         6,
-        3.44
+        3.44,
+        false
     };
 
     const AtomTemplate TFluorine {
@@ -282,7 +291,8 @@
         10,
         MINUS_ONE,
         7,
-        3.98
+        3.98,
+        false
     };
 
     const AtomTemplate TNeon {
@@ -290,7 +300,8 @@
         10,
         ZERO,
         8,
-        99 //Unknown, no reactions implying this anyways
+        99, //Unknown, no reactions implying this anyways
+        false
     };
 
     const AtomTemplate TSodium {
@@ -298,7 +309,8 @@
         10,
         PLUS_ONE,
         1,
-        0.93
+        0.93,
+        true
     };
 
     const AtomTemplate TMagnesium {
@@ -306,7 +318,8 @@
         12,
         PLUS_TWO,
         2,
-        1.31
+        1.31,
+        false
     };
 
     const AtomTemplate TAluminum {
@@ -314,7 +327,8 @@
 		14,
 		PLUS_THREE,
 		3,
-		1.61
+		1.61,
+		false
 	};
 
     const AtomTemplate TSilicon {
@@ -322,7 +336,8 @@
 		14,
 		PLUS_FOUR,
 		4,
-		1.90
+		1.90,
+		false
 	};
 
 	const AtomTemplate TPhosphorus {
@@ -330,7 +345,8 @@
 		16,
 		PLUS_FIVE,
 		5,
-		2.19
+		2.19,
+		false
 	};
 
 	const AtomTemplate TSulfur {
@@ -338,7 +354,8 @@
 		16,
 		PLUS_SIX + PLUS_FOUR + MINUS_TWO,
 		6,
-		2.58
+		2.58,
+		false
 	};
 
     const AtomTemplate TAtoms[17] = {
