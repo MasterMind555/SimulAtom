@@ -358,6 +358,15 @@
 		false
 	};
 
+    const AtomTemplate TChlorine {
+		CHLORINE,
+        18,
+        MINUS_ONE,
+        7,
+        3.16,
+		false
+	};
+
     const AtomTemplate TAtoms[17] = {
         THydrogen,
         THydrogen,

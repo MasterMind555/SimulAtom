@@ -28,17 +28,8 @@ void SimulAtomMain::OnLoop() {
                 {
                     if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
                     {
-                        //Only 2 atoms collision for now
-                        if(atoms[i]->getOxyNumber() > 512 && atoms[e]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
-                        {
-                            checkReaction(i, e);
-                            break;
-                        }
-                        if(atoms[e]->getOxyNumber() > 512 && atoms[i]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
-                        {
-                            checkReaction(i, e);
-                            break;
-                        }
+                        checkReaction(i, e);
+                        break;
                     }
                 }
 
@@ -116,15 +107,18 @@ void SimulAtomMain::checkReaction(int i, int e)
     if(dif < 0)
         dif *= -1;
 
-    if(dif < 0.5)
+    if(dif < 0.5 && dif > 0)
         bNonPolarCovalent(i, e);
-    else if(dif < 1.6)
+    else if(dif < 1.6 && dif >= 0.5)
         bPolarCovalent(i, e);
-    else if(dif < 2.0)
+    else if(dif >= 1.6 && dif < 2.0)
     {
-        printf("Need to know if atoms are metals or not");
+        if(atoms[e]->getMetal() || atoms[e]->getMetal())
+            bIonic(i, e);
+        else
+            bPolarCovalent(i, e);
     }
-    else if(dif > 2.0)
+    else if(dif >= 2.0)
         bIonic(i, e);
 
 }
@@ -149,28 +143,45 @@ void SimulAtomMain::bPolarCovalent(int i, int e){
 }
 
 void SimulAtomMain::bIonic(int i, int e){
+
+
     if((atoms[i]->getMetal() && atoms[e]->getMetal()) || (!atoms[i]->getMetal() && !atoms[e]->getMetal()))//If both are metal or none are metal
         return;
+
 
     int iOx = atoms[i]->getOxyNumber();
     int eOx = atoms[e]->getOxyNumber();
 
-    if(iOx % 256 >= 32 && eOx % 65536 >= 8192)//If iOx has a negative value between -3 and -1 and eOx has a positive value between 5 and 7
+    if(iOx % 256 >= 32 && (eOx % 65536 >= 8192 || eOx % 4096 >= 512))//If iOx has a negative value between -3 and -1 and eOx has a positive value between 5 and 7 or 1 and 3
     {
-        if(iOx % 256 >= 128 && eOx % 65536 >= 32768)
+
+        if(iOx % 256 >= 128 && eOx % 65536 >= 32768)// -1 and +7
             createMolecule(i, 1, e, 1);
-        else if(iOx % 128 >= 64 && eOx % 32768 >= 16384)
+        else if(iOx % 128 >= 64 && eOx % 32768 >= 16384)// -2 and +6
             createMolecule(i, 1, e, 1);
-        else if(iOx % 64 >= 32 && eOx % 16384 >= 8192)
+        else if(iOx % 64 >= 32 && eOx % 16384 >= 8192)// -3 and +5
             createMolecule(i, 1, e, 1);
+        else if(iOx % 256 >= 128 && eOx % 1024 >= 512)// -1 and +1
+            createMolecule(i, 1, e, 1);
+        else if(iOx % 128 >= 64 && eOx % 2048 >= 1024)// -2 and +2
+            createMolecule(i, 1, e, 1);
+        else if(iOx % 64 >= 32 && eOx % 4096 >= 2048)// -3 and +3
+            createMolecule(i, 1, e, 1);
+
     }
-    else if(eOx % 256 >= 32 && iOx % 65536 >= 8192)
+    else if(eOx % 256 >= 32 && (iOx % 65536 >= 8192 || iOx % 4096 >= 512))
     {
-        if(eOx % 256 >= 128 && iOx % 65536 >= 32768)
+        if(eOx % 256 >= 128 && iOx % 65536 >= 32768)// -1 and +7
             createMolecule(i, 1, e, 1);
-        else if(eOx % 128 >= 64 && iOx % 32768 >= 16384)
+        else if(eOx % 128 >= 64 && iOx % 32768 >= 16384)// -2 and +6
             createMolecule(i, 1, e, 1);
-        else if(eOx % 64 >= 32 && iOx % 16384 >= 8192)
+        else if(eOx % 64 >= 32 && iOx % 16384 >= 8192)// -3 and +5
+            createMolecule(i, 1, e, 1);
+        else if(eOx % 256 >= 128 && iOx % 1024 >= 512)// -1 and +1
+            createMolecule(i, 1, e, 1);
+        else if(eOx % 128 >= 64 && iOx % 2048 >= 1024)// -2 and +2
+            createMolecule(i, 1, e, 1);
+        else if(eOx % 64 >= 32 && iOx % 4096 >= 2048)// -3 and +3
             createMolecule(i, 1, e, 1);
     }
 }

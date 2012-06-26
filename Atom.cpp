@@ -22,6 +22,7 @@ Atom::Atom(AtomTemplate properties, int x, int y){
     neutrons = properties.neutrons;
     oxydationNumber = properties.oxydationNumber;
     en = properties.en;
+    metal = properties.metal;
     temperature = 295;
 
     velX = 0;
