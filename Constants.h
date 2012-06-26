@@ -213,6 +213,13 @@
         UNUNOCTIUM
     };
 
+    /*
+
+
+        The Oxydation Numbers below might not be correct, could be a significant source of misbehaviors
+
+
+    */
     const AtomTemplate THydrogen {
         HYDROGEN,
         1,
@@ -262,7 +269,7 @@
     const AtomTemplate TCarbon {
         CARBON,
         6,
-        PLUS_FOUR,
+        PLUS_FOUR + MINUS_TWO + MINUS_FOUR,
         2,
         2.55,
         false
@@ -271,7 +278,7 @@
     const AtomTemplate TNitrogen {
         NITROGEN,
         7,
-        PLUS_FIVE + MINUS_THREE,
+        PLUS_FIVE + MINUS_THREE + PLUS_ONE + PLUS_TWO + PLUS_THREE + PLUS_FOUR,
         2,
         3.04,
         false
@@ -280,7 +287,7 @@
     const AtomTemplate TOxygen {
         OXYGEN,
         8,
-        MINUS_TWO + PLUS_TWO,//Not sure if correct or the engine requires that at this state
+        MINUS_TWO + PLUS_TWO + MINUS_ONE,//Not sure if correct or the engine requires that at this state
         6,
         3.44,
         false
@@ -334,7 +341,7 @@
     const AtomTemplate TSilicon {
 		SILICON,
 		14,
-		PLUS_FOUR,
+		PLUS_FOUR + MINUS_FOUR,
 		4,
 		1.90,
 		false
@@ -343,7 +350,7 @@
 	const AtomTemplate TPhosphorus {
 		PHOSPHORUS,
 		16,
-		PLUS_FIVE,
+		PLUS_FIVE + PLUS_THREE + MINUS_THREE,
 		5,
 		2.19,
 		false
@@ -352,7 +359,7 @@
 	const AtomTemplate TSulfur {
 		SULFUR,
 		16,
-		PLUS_SIX + PLUS_FOUR + MINUS_TWO,
+		PLUS_SIX + PLUS_FOUR + MINUS_TWO + PLUS_TWO,
 		6,
 		2.58,
 		false
@@ -361,7 +368,7 @@
     const AtomTemplate TChlorine {
 		CHLORINE,
         18,
-        MINUS_ONE,
+        MINUS_ONE + PLUS_ONE + PLUS_THREE + PLUS_FOUR + PLUS_FIVE + PLUS_SIX + PLUS_SEVEN,
         7,
         3.16,
 		false
