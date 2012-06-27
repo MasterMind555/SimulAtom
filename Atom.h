@@ -50,6 +50,9 @@ class Atom{
         float           getEn();
         void            setEn(float val);
 
+        bool            getMetal();
+        void            setMetal(bool val);
+
         bool            getBonded();
         //void          setBonded(bool val);
 
@@ -67,6 +70,7 @@ class Atom{
         int             temperature;
         int             oxydationNumber;
         float           en;//Electronegativity
+        bool            metal;
 
 };
 

@@ -28,17 +28,8 @@ void SimulAtomMain::OnLoop() {
                 {
                     if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
                     {
-                        //Only 2 atoms collision for now
-                        if(atoms[i]->getOxyNumber() > 512 && atoms[e]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
-                        {
-                            checkReaction(i, e, true);
-                            break;
-                        }
-                        if(atoms[e]->getOxyNumber() > 512 && atoms[i]->getOxyNumber() % 256 != 0) //If the first molecule has a positive oxydation number and the second one has a negative one
-                        {
-                            checkReaction(i, e, false);
-                            break;
-                        }
+                        checkReaction(i, e);
+                        break;
                     }
                 }
 
@@ -110,69 +101,87 @@ void SimulAtomMain::createMolecule(int i, int numI, int e, int numE)
 
 }
 
-void SimulAtomMain::checkReaction(int i, int e, bool posIsI)
+void SimulAtomMain::checkReaction(int i, int e)
 {
     float dif = atoms[i]->getEn() - atoms[e]->getEn();
     if(dif < 0)
         dif *= -1;
 
-    if(dif < 0.5)
-        bNonPolarCovalent(i, e, posIsI);
-    else if(dif < 1.6)
-        bPolarCovalent(i, e, posIsI);
-    else if(dif < 2.0)
+    if(dif < 0.5 && dif > 0)
+        bNonPolarCovalent(i, e);
+    else if(dif < 1.6 && dif >= 0.5)
+        bPolarCovalent(i, e);
+    else if(dif >= 1.6 && dif < 2.0)
     {
-        printf("Need to know if atoms are metals or not");
+        if(atoms[e]->getMetal() || atoms[e]->getMetal())
+            bIonic(i, e);
+        else
+            bPolarCovalent(i, e);
     }
-    else if(dif > 2.0)
-        bIonic(i, e, posIsI);
+    else if(dif >= 2.0)
+        bIonic(i, e);
 
 }
 
-void SimulAtomMain::bNonPolarCovalent(int i, int e, bool posIsI){
-    bool bigIsI = false;
-    int big = 0;
-    int small = 0;
+void SimulAtomMain::bNonPolarCovalent(int i, int e){
+
     int iOx = atoms[i]->getOxyNumber();
     int eOx = atoms[e]->getOxyNumber();
 
-    if(posIsI)//If I is positive and E is negative
-    {
-        bigIsI = iOx > eOx * -1 ? true : false;//Checks if the biggest number ( Without counting the negative ) is I
-        big =  bigIsI ? iOx : eOx * -1;//Assigns the biggest number to the variable big
-        small =  !bigIsI ? iOx : eOx * -1;
-    }
-    else
-    {
-        bigIsI = iOx * -1 > eOx  ? true : false;
-        big =  bigIsI  ? iOx * -1 : eOx;
-        small =  !bigIsI ? iOx * -1 : eOx;
-    }
-
-
-    bool found = false;
-    int u, o;
-    for(u = 1; u < 9; u++)//For a good amount of atoms 1
-    {
-        if(!found)
-            for(o = 1; o < 9; o++)//For a good amount of atoms 2
-                if((big * u % small * o)== 0)//If those numbers will be equal
-                {
-                    createMolecule(i,
-                                   bigIsI ?  u : big * u / small * o,
-                                   e,
-                                   bigIsI ?  big * u / small * o : o);//Make a molecule
-                    found = true;
-                    break;
-                }
-    }
-}
-
-
-void SimulAtomMain::bPolarCovalent(int i, int e, bool posIsI){
+    if(iOx < 0)
+        iOx *= -1;
+    if(eOx < 0)
+        eOx *= -1;
+    if(iOx == eOx)
+        createMolecule(i, 1, e, 1);
 
 }
 
-void SimulAtomMain::bIonic(int i, int e, bool posIsI){
 
+void SimulAtomMain::bPolarCovalent(int i, int e){
+    bNonPolarCovalent(i, e);
+}
+
+void SimulAtomMain::bIonic(int i, int e){
+
+
+    if((atoms[i]->getMetal() && atoms[e]->getMetal()) || (!atoms[i]->getMetal() && !atoms[e]->getMetal()))//If both are metal or none are metal
+        return;
+
+
+    int iOx = atoms[i]->getOxyNumber();
+    int eOx = atoms[e]->getOxyNumber();
+
+    if(iOx % 256 >= 32 && (eOx % 65536 >= 8192 || eOx % 4096 >= 512))//If iOx has a negative value between -3 and -1 and eOx has a positive value between 5 and 7 or 1 and 3
+    {
+
+        if(iOx % 256 >= 128 && eOx % 65536 >= 32768)// -1 and +7
+            createMolecule(i, 1, e, 1);
+        else if(iOx % 128 >= 64 && eOx % 32768 >= 16384)// -2 and +6
+            createMolecule(i, 1, e, 1);
+        else if(iOx % 64 >= 32 && eOx % 16384 >= 8192)// -3 and +5
+            createMolecule(i, 1, e, 1);
+        else if(iOx % 256 >= 128 && eOx % 1024 >= 512)// -1 and +1
+            createMolecule(i, 1, e, 1);
+        else if(iOx % 128 >= 64 && eOx % 2048 >= 1024)// -2 and +2
+            createMolecule(i, 1, e, 1);
+        else if(iOx % 64 >= 32 && eOx % 4096 >= 2048)// -3 and +3
+            createMolecule(i, 1, e, 1);
+
+    }
+    else if(eOx % 256 >= 32 && (iOx % 65536 >= 8192 || iOx % 4096 >= 512))
+    {
+        if(eOx % 256 >= 128 && iOx % 65536 >= 32768)// -1 and +7
+            createMolecule(i, 1, e, 1);
+        else if(eOx % 128 >= 64 && iOx % 32768 >= 16384)// -2 and +6
+            createMolecule(i, 1, e, 1);
+        else if(eOx % 64 >= 32 && iOx % 16384 >= 8192)// -3 and +5
+            createMolecule(i, 1, e, 1);
+        else if(eOx % 256 >= 128 && iOx % 1024 >= 512)// -1 and +1
+            createMolecule(i, 1, e, 1);
+        else if(eOx % 128 >= 64 && iOx % 2048 >= 1024)// -2 and +2
+            createMolecule(i, 1, e, 1);
+        else if(eOx % 64 >= 32 && iOx % 4096 >= 2048)// -3 and +3
+            createMolecule(i, 1, e, 1);
+    }
 }

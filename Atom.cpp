@@ -22,6 +22,7 @@ Atom::Atom(AtomTemplate properties, int x, int y){
     neutrons = properties.neutrons;
     oxydationNumber = properties.oxydationNumber;
     en = properties.en;
+    metal = properties.metal;
     temperature = 295;
 
     velX = 0;
@@ -102,6 +103,14 @@ int Atom::getOxyNumber(){
 
 void Atom::setOxyNumber(int val){
     oxydationNumber = val;
+}
+
+bool Atom::getMetal(){
+    return metal;
+}
+
+void Atom::setMetal(bool val){
+    metal = val;
 }
 
 /*

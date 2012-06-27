@@ -1,0 +1,21 @@
+# Reactions.txt
+# Contains elemental reactions for the game, maybe parsable?
+
+
+# Parse this via the game? omgsuperhard
+# Anyways, here's some syntax:
+
+# [ELEMENT CATEGORY: (Oxide, metal, acid, base)] - variable element
+
+# [Element category, mendeleyev table period(IA-VIIIA, IB-VIIIB)] - variable element limited to Mendeleyev period
+# WATER - constant element
+
+# -> - reaction delimiter, on the left are beginning elements, on the right are ending elements
+# + - reaction addition, these two elements react (when on the left side) or are created (when on the right side)
+
+#
+
+[ACID] + [BASE] -> [SALT] + WATER
+[ACID] + [METAL, IA-IIA] -> [SALT] + HYDROGEN
+[METAL] + [OXYGEN] -> [OXIDE]
+

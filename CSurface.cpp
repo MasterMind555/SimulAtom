@@ -3,11 +3,11 @@
 CSurface::CSurface() {
 }
 
-SDL_Surface* CSurface::OnLoad(char* File) {
+SDL_Surface* CSurface::onLoad(char* file) {
     SDL_Surface* Surf_Temp = NULL;
     SDL_Surface* Surf_Return = NULL;
 
-    if((Surf_Temp = SDL_LoadBMP(File)) == NULL) {//Tries to load the BMP into Surf_Temp
+    if((Surf_Temp = SDL_LoadBMP(file)) == NULL) {//Tries to load the BMP into Surf_Temp
         return NULL;
     }
 
@@ -17,12 +17,12 @@ SDL_Surface* CSurface::OnLoad(char* File) {
     return Surf_Return;
 }
 
-SDL_Surface* CSurface::OnLoadPng(char* File) {
+SDL_Surface* CSurface::onLoadPng(char* file) {
 
     SDL_Surface* Surf_Temp = NULL;
     SDL_Surface* Surf_Return = NULL;
 
-    if((Surf_Temp = IMG_Load(File)) == NULL)//Tries to load the PNG
+    if((Surf_Temp = IMG_Load(file)) == NULL)//Tries to load the PNG
         return NULL;
 
     Surf_Return = SDL_DisplayFormatAlpha(Surf_Temp);//Sets the image to the right format while keeping transparency
@@ -31,27 +31,34 @@ SDL_Surface* CSurface::OnLoadPng(char* File) {
     return Surf_Return;
 }
 
-bool CSurface::Transparent(SDL_Surface* Surf_Dest, int R, int G, int B) {
-    if(Surf_Dest == NULL) {
+bool CSurface::transparent(SDL_Surface* destination, int R, int G, int B) {
+    if(destination == NULL) {
         return false;
     }
 
-    SDL_SetColorKey(Surf_Dest, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(Surf_Dest->format, R, G, B));//Sets the given colour to transparent
+    SDL_SetColorKey(destination, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(destination->format, R, G, B));//Sets the given colour to transparent
 
     return true;
 }
 
-bool CSurface::OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y) {
-    if(Surf_Dest == NULL || Surf_Src == NULL) {
+void CSurface::setPixel(SDL_Surface* target, int x, int y, Uint32 color)
+{
+    Uint8* pixel = (Uint8*)target->pixels;
+    pixel += (y * target->pitch) + (x * sizeof(Uint32));
+    *((Uint32*)pixel) = color;
+}
+
+bool CSurface::onDraw(SDL_Surface* destination, SDL_Surface* source, int X, int Y) {
+    if(destination == NULL || source == NULL) {
         return false;
     }
 
-    SDL_Rect DestR;
+    SDL_Rect destR;
 
-    DestR.x = X;
-    DestR.y = Y;
+    destR.x = X;
+    destR.y = Y;
 
-    SDL_BlitSurface(Surf_Src, NULL, Surf_Dest, &DestR);
+    SDL_BlitSurface(source, NULL, destination, &destR);
 
     return true;
 }

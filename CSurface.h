@@ -20,13 +20,15 @@ class CSurface {
         CSurface();
 
     public:
-        static SDL_Surface* OnLoad(char* File);
+        static SDL_Surface* onLoad(char* file);
 
-        static SDL_Surface* OnLoadPng(char* File);
+        static SDL_Surface* onLoadPng(char* file);
 
-        static bool OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y);
+        static bool onDraw(SDL_Surface* destination, SDL_Surface* source, int X, int Y);
 
-        static bool Transparent(SDL_Surface* Surf_Dest, int R, int G, int B);
+        static bool transparent(SDL_Surface* destination, int R, int G, int B);
+
+        static void setPixel(SDL_Surface* target, int x, int y, Uint32 color);
 };
 
 #endif

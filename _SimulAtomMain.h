@@ -31,6 +31,8 @@ class SimulAtomMain : public CEvent {
         bool            running;
         bool            simulating;
 
+        int             selected;
+
         SDL_Surface*    screen;
 
         SDL_Surface*    background;
@@ -56,11 +58,11 @@ class SimulAtomMain : public CEvent {
         bool            checkCollision(int xA, int yA, int xB, int yB);
 
         void            createMolecule(int i, int numI, int e, int numE);
-        void            checkReaction(int positive, int negative, bool posIsI);
+        void            checkReaction(int positive, int negative);
 
-        void            bNonPolarCovalent(int i, int e, bool posIsI);
-        void            bPolarCovalent(int i, int e, bool posIsI);
-        void            bIonic(int i, int e, bool posIsI);
+        void            bNonPolarCovalent(int i, int e);
+        void            bPolarCovalent(int i, int e);
+        void            bIonic(int i, int e);
 
         /*
             Switches of Simulation
