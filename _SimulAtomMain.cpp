@@ -16,6 +16,7 @@ SimulAtomMain::SimulAtomMain() {
 
     running = true;
     simulating = true;
+    elMenuOpened = false;
     gameState = MAIN_MENU;
 
 
@@ -33,6 +34,13 @@ SimulAtomMain::SimulAtomMain() {
     menuButtons[PLAY_BUTTON].setY(SCREEN_HEIGHT - 60);
     if(menuButtons[PLAY_BUTTON].checkIfValid() == false)
         printf("Problem while initializing the %dth button", PLAY_BUTTON);
+
+    elMenuButton.setWidth(53);
+    elMenuButton.setHeight(50);
+    elMenuButton.setX(SCREEN_WIDTH - 53);
+    elMenuButton.setY(0);
+    if(elMenuButton.checkIfValid() == false)
+        printf("Problem while initializing the open menu button");
 
     setAtomDemo();
 
@@ -119,6 +127,9 @@ void SimulAtomMain::OnLButtonDown(int mX, int mY){
     }
     else if(gameState == GAME_SCREEN)
     {
+        if(elMenuButton.checkMouseClick(mX, mY, true))
+            elMenuOpened = !elMenuOpened;
+
         atoms.push_back(new Atom(TAtoms[selected], mX, mY));
     }
 

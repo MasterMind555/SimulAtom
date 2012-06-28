@@ -40,6 +40,7 @@ class SimulAtomMain : public CEvent {
 
         SDL_Surface*    playIcon;
         SDL_Surface*    exitIcon;
+        SDL_Surface*    elMenuIcon;
 
         std::vector<SDL_Surface*> atomIcons;
 
@@ -48,6 +49,7 @@ class SimulAtomMain : public CEvent {
         SDL_Surface*    moleculeIcon;
 
         Button          menuButtons[NUM_MENU_BUTTONS];
+        Button          elMenuButton;
 
         std::vector<Atom*>          atoms;
         std::vector<Molecule*>      molecules;
@@ -70,6 +72,7 @@ class SimulAtomMain : public CEvent {
 
         bool            preciseCollision;
 
+        bool            elMenuOpened;
     public:
         SimulAtomMain();
 

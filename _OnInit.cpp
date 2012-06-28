@@ -46,6 +46,10 @@ bool SimulAtomMain::OnInit() {
         printf("Can't find atom icon");
         return false;
     }
+    if((elMenuIcon = CSurface::onLoadPng("img/menuslide.png")) == NULL) {
+        printf("Can't find element menu icon");
+        return false;
+    }
 
     const bool h[6][5] = {
         {1, 0, 0, 0, 1},
