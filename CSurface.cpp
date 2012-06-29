@@ -48,7 +48,7 @@ void CSurface::setPixel(SDL_Surface* target, int x, int y, Uint32 color)
     *((Uint32*)pixel) = color;
 }
 
-bool CSurface::onDraw(SDL_Surface* destination, SDL_Surface* source, int X, int Y) {
+bool CSurface::onDraw(SDL_Surface* destination, SDL_Surface* source, int X, int Y, SDL_Rect* section = NULL) {
     if(destination == NULL || source == NULL) {
         return false;
     }
@@ -58,7 +58,7 @@ bool CSurface::onDraw(SDL_Surface* destination, SDL_Surface* source, int X, int 
     destR.x = X;
     destR.y = Y;
 
-    SDL_BlitSurface(source, NULL, destination, &destR);
+    SDL_BlitSurface(source, section, destination, &destR);
 
     return true;
 }

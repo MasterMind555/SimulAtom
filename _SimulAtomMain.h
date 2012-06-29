@@ -44,6 +44,9 @@ class SimulAtomMain : public CEvent {
 
         std::vector<SDL_Surface*> atomIcons;
 
+        SDL_Surface*    fontSpriteSheet;
+        std::vector<SDL_Surface*> font;
+
         SDL_Surface*    atomIconTemplate;
 
         SDL_Surface*    moleculeIcon;

@@ -10,6 +10,7 @@ SimulAtomMain::SimulAtomMain() {
     playIcon = NULL;
     exitIcon = NULL;
     atomIconTemplate = NULL;
+    fontSpriteSheet = NULL;
     preciseCollision = false;
 
     selected = 1;
