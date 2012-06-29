@@ -23,6 +23,11 @@ class Molecule{
         void            setPosX(int val);
         void            setPosY(int val);
 
+        int             getVelX();
+        int             getVelY();
+        void            setVelX(int val);
+        void            setVelY(int val);
+
         int             getTemperature();
         void            setTemperature(int val);
 

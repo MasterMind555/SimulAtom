@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-Molecule::Molecule(Atom* components, int size){
+Molecule::Molecule(Atom* components, int size) {
 
     velX = 0;
     velY = 0;
@@ -28,7 +28,7 @@ Molecule::Molecule(Atom* components, int size){
 
 }
 
-void Molecule::move(){
+void Molecule::move() {
     int wiggleX = 0;
     int wiggleY = 0;
 
@@ -56,26 +56,42 @@ void Molecule::move(){
     posY += velY + wiggleY;
 }
 
-int Molecule::getPosX(){
+int Molecule::getPosX() {
     return posX;
 }
 
-int Molecule::getPosY(){
+int Molecule::getPosY() {
     return posY;
 }
 
-void Molecule::setPosX(int val){
+void Molecule::setPosX(int val) {
     posX = val;
 }
 
-void Molecule::setPosY(int val){
+void Molecule::setPosY(int val) {
     posY = val;
 }
 
-int Molecule::getTemperature(){
+int Molecule::getVelX() {
+    return velX;
+}
+
+int Molecule::getVelY() {
+    return velY;
+}
+
+void Molecule::setVelX(int val) {
+    velX = val;
+}
+
+void Molecule::setVelY(int val) {
+    velY = val;
+}
+
+int Molecule::getTemperature() {
     return temperature;
 }
 
-void Molecule::setTemperature(int val){
+void Molecule::setTemperature(int val) {
     temperature = val;
 }

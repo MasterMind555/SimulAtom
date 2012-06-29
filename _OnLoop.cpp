@@ -22,7 +22,11 @@ void SimulAtomMain::OnLoop() {
         for(i = 0; i < atoms.size(); i++)
                     atoms[i]->move();
 
+        for(i = 0; i < molecules.size(); i++)
+                molecules[i]->move();
+
         for(i = 0; i < atoms.size(); i++)
+        {
             for(e = 0; e < atoms.size(); e++)
                 if(e != i)
                 {
@@ -36,9 +40,19 @@ void SimulAtomMain::OnLoop() {
                         break;
                     }
                 }
+            for(e = 0; e < molecules.size(); e++)
+                    if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), molecules[e]->getPosX(), molecules[e]->getPosY()))
+                    {
+                        atoms[i]->setVelX(atoms[i]->getVelX() * ATOM_SPEED_LOSS);
+                        atoms[i]->setVelY(atoms[i]->getVelY() * ATOM_SPEED_LOSS);
+                        molecules[e]->setVelX(molecules[e]->getVelX() * ATOM_SPEED_LOSS);
+                        molecules[e]->setVelY(molecules[e]->getVelY() * ATOM_SPEED_LOSS);
+                        break;
+                    }
 
-        for(i = 0; i < molecules.size(); i++)
-                    molecules[i]->move();
+        }
+
+
 
 
             //count2 = SDL_GetTicks();

@@ -134,14 +134,17 @@ void Atom::move(){
     velY += ((rand() % 3) - 1) * (temperature / 50);
 
     if(posX + velX < 0 || posX + velX > SCREEN_WIDTH - ATOM_ICON_WIDTH){//Minus 20 because of the offset of the texture ( Which is 20x20 )
-        velX *= ATOM_SPEED_LOSS;
+        velX *= -1;
     }
 
     if(posY + velY < 0 || posY + velY > SCREEN_HEIGHT - ATOM_ICON_HEIGHT){
-        velY *= ATOM_SPEED_LOSS;
+        velY *= -1;
     }
 
     posX += velX;
     posY += velY;
+
+    velX *= ATOM_SPEED_LOSS;
+    velY *= ATOM_SPEED_LOSS;
 
 }
