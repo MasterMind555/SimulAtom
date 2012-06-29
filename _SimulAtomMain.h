@@ -99,6 +99,8 @@ class SimulAtomMain : public CEvent {
 
         void OnLButtonDown(int mX, int mY);
 
+        void OnRButtonDown(int mX, int mY);
+
 };
 
 #endif

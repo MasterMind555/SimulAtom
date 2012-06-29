@@ -134,3 +134,22 @@ void SimulAtomMain::OnLButtonDown(int mX, int mY){
     }
 
 }
+
+void SimulAtomMain::OnRButtonDown(int mX, int mY){
+
+    if(gameState ==  GAME_SCREEN)
+    {
+        int i;
+        for(i = 0; i < atoms.size(); i++)
+        {
+            if(checkCollision(mX, mY, atoms[i]->getPosX(), atoms[i]->getPosY()))
+                 atoms.erase(atoms.begin() + i);
+        }
+        for(i = 0; i < molecules.size(); i++)
+        {
+            if(checkCollision(mX, mY, molecules[i]->getPosX(), molecules[i]->getPosY()))
+                 molecules.erase(molecules.begin() + i);
+        }
+
+    }
+}
