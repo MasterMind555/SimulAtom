@@ -53,8 +53,6 @@ void SimulAtomMain::OnLoop() {
         }
 
 
-
-
             //count2 = SDL_GetTicks();
             //printf("%d \n", count2 - count1);
         }
@@ -146,12 +144,12 @@ void SimulAtomMain::bNonPolarCovalent(int i, int e){
     int iOx = atoms[i]->getOxyNumber();
     int eOx = atoms[e]->getOxyNumber();
 
-    if(iOx < 0)
-        iOx *= -1;
-    if(eOx < 0)
-        eOx *= -1;
-    if(iOx == eOx)
+    if((iOx % 256 >= 128 && eOx % 256 >= 128) ||
+       (iOx % 128 >= 64 && eOx % 128 >= 64) ||
+       (iOx % 64 >= 32 && eOx % 64 >= 32) ||
+       (iOx % 32 >= 16 && eOx % 32 >= 16))
         createMolecule(i, 1, e, 1);
+
 
 }
 
