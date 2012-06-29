@@ -28,6 +28,10 @@ void SimulAtomMain::OnLoop() {
                 {
                     if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
                     {
+                        atoms[i]->setVelX(atoms[i]->getVelX() * ATOM_SPEED_LOSS);
+                        atoms[i]->setVelY(atoms[i]->getVelY() * ATOM_SPEED_LOSS);
+                        atoms[e]->setVelX(atoms[e]->getVelX() * ATOM_SPEED_LOSS);
+                        atoms[e]->setVelY(atoms[e]->getVelY() * ATOM_SPEED_LOSS);
                         checkReaction(i, e);
                         break;
                     }
@@ -107,7 +111,7 @@ void SimulAtomMain::checkReaction(int i, int e)
     if(dif < 0)
         dif *= -1;
 
-    if(dif < 0.5 && dif > 0)
+    if(dif < 0.5 && dif >= 0)
         bNonPolarCovalent(i, e);
     else if(dif < 1.6 && dif >= 0.5)
         bPolarCovalent(i, e);

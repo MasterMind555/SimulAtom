@@ -78,10 +78,9 @@ int main(int argc, char* argv[]) {
 
 void SimulAtomMain::setAtomDemo(){
     int i;
-    for(i = 0; i < MAX_ATOMS / 2; i++)
-        atoms.push_back(new Atom(TChlorine, rand() % SCREEN_WIDTH - ATOM_ICON_WIDTH, rand() % SCREEN_HEIGHT - ATOM_ICON_HEIGHT));
-    for(i = 0; i < MAX_ATOMS / 2; i++)
-        atoms.push_back(new Atom(TSodium, rand() % SCREEN_WIDTH - ATOM_ICON_WIDTH, rand() % SCREEN_HEIGHT - ATOM_ICON_HEIGHT));
+    for(i = 0; i < MAX_ATOMS; i++)
+        atoms.push_back(new Atom(THydrogen, rand() % SCREEN_WIDTH - ATOM_ICON_WIDTH, rand() % SCREEN_HEIGHT - ATOM_ICON_HEIGHT));
+
 
 
 }

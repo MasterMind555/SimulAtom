@@ -39,6 +39,8 @@
     const int MAX_ATOMS = 256;
     const int MAX_MOLECULES = 128;
 
+    const int ATOM_SPEED_LOSS = -.5;
+
     //The order of the buttons
     enum {
         EXIT_BUTTON = 0,
