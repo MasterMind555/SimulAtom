@@ -20,7 +20,6 @@ SimulAtomMain::SimulAtomMain() {
     elMenuOpened = false;
     gameState = MAIN_MENU;
 
-
     //Sets the play and exit button's position and size
     menuButtons[EXIT_BUTTON].setWidth(119);
     menuButtons[EXIT_BUTTON].setHeight(50);
@@ -48,6 +47,7 @@ SimulAtomMain::SimulAtomMain() {
 }
 
 int SimulAtomMain::OnExecute() {
+
     if(OnInit() == false) {
         return -1;
     }
@@ -68,12 +68,14 @@ int SimulAtomMain::OnExecute() {
     OnCleanup();
 
     return 0;
+
 }
 
 int main(int argc, char* argv[]) {
-    SimulAtomMain theApp;
 
+    SimulAtomMain theApp;
     return theApp.OnExecute();
+
 }
 
 void SimulAtomMain::setAtomDemo(){
@@ -92,23 +94,13 @@ void SimulAtomMain::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode){
             gameState = MAIN_MENU;
         if(sym == SDLK_SPACE)
             simulating = !simulating;
-        if(sym == SDLK_1)
-            selected = 1;
-        if(sym == SDLK_2)
-            selected = 2;
-        if(sym == SDLK_3)
-            selected = 3;
-        if(sym == SDLK_4)
-            selected = 5;
-        if(sym == SDLK_6)
-            selected = 6;
-        if(sym == SDLK_7)
-            selected = 7;
-        if(sym == SDLK_8)
-            selected = 8;
-        if(sym == SDLK_9)
-            selected = 9;
+        if(sym == SDLK_UP)
+            selected = (selected + 1) % sizeof(TAtoms);
+        if(sym == SDLK_DOWN)
+            selected = (selected - 1) % sizeof(TAtoms);
+
     }
+
 }
 
 void SimulAtomMain::OnLButtonDown(int mX, int mY){
@@ -149,6 +141,6 @@ void SimulAtomMain::OnRButtonDown(int mX, int mY){
             if(checkCollision(mX, mY, molecules[i]->getPosX(), molecules[i]->getPosY()))
                  molecules.erase(molecules.begin() + i);
         }
-
     }
+
 }
