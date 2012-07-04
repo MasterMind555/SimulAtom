@@ -25,22 +25,16 @@ SimulAtomMain::SimulAtomMain() {
     menuButtons[EXIT_BUTTON].setHeight(50);
     menuButtons[EXIT_BUTTON].setX(100);
     menuButtons[EXIT_BUTTON].setY(SCREEN_HEIGHT - 60);
-    if(menuButtons[EXIT_BUTTON].checkIfValid() == false)
-        printf("Problem while initializing the %dth button", EXIT_BUTTON);
 
     menuButtons[PLAY_BUTTON].setWidth(117);
     menuButtons[PLAY_BUTTON].setHeight(50);
     menuButtons[PLAY_BUTTON].setX(SCREEN_WIDTH - 117 - 100);
     menuButtons[PLAY_BUTTON].setY(SCREEN_HEIGHT - 60);
-    if(menuButtons[PLAY_BUTTON].checkIfValid() == false)
-        printf("Problem while initializing the %dth button", PLAY_BUTTON);
 
     elMenuButton.setWidth(53);
     elMenuButton.setHeight(50);
     elMenuButton.setX(SCREEN_WIDTH - 53);
     elMenuButton.setY(0);
-    if(elMenuButton.checkIfValid() == false)
-        printf("Problem while initializing the open menu button");
 
     setAtomDemo();
 

@@ -51,11 +51,11 @@ bool Button::checkMouseExit(int X, int Y){
 }
 
 bool Button::checkIfValid() {
-    if( x > 0 && x < SCREEN_WIDTH &&
-        y > 0 && y < SCREEN_HEIGHT &&
+    if( x >= 0 && x < SCREEN_WIDTH &&
+        y >= 0 && y < SCREEN_HEIGHT &&
         width > 0 && width < SCREEN_WIDTH &&
         height > 0 && height < SCREEN_HEIGHT &&
-        icon != NULL)//Cbecks if the variables are set to a correct number
+        icon != NULL)//Checks if the variables are set to a correct number
         return true;
 
     return false;

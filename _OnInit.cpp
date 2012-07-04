@@ -67,8 +67,14 @@ bool SimulAtomMain::OnInit() {
 
     menuButtons[PLAY_BUTTON].setIcon(&playIcon);
     menuButtons[EXIT_BUTTON].setIcon(&exitIcon);
+    elMenuButton.setIcon(&elMenuIcon);
 
-
+    if(menuButtons[EXIT_BUTTON].checkIfValid() == false)
+        printf("Problem while initializing the %dth button", EXIT_BUTTON);
+    if(menuButtons[PLAY_BUTTON].checkIfValid() == false)
+        printf("Problem while initializing the %dth button", PLAY_BUTTON);
+    if(elMenuButton.checkIfValid() == false)
+        printf("Problem while initializing the open menu button");
 
     int w, h;
     for(i = 1; i < ATOMS_TYPE_AMOUNT; i++)
