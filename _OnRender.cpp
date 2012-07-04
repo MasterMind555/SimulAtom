@@ -28,6 +28,7 @@ void SimulAtomMain::OnRender() {
             CSurface::onDraw(screen, menuButtons[i].getIcon(), menuButtons[i].getX(), menuButtons[i].getY(), NULL);
         }
 
+
     }
 
     SDL_Flip(screen);

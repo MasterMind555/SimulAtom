@@ -14,6 +14,7 @@
 
 
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <vector>
 
 #include "CEvent.h"
@@ -44,12 +45,12 @@ class SimulAtomMain : public CEvent {
 
         std::vector<SDL_Surface*> atomIcons;
 
-        SDL_Surface*    fontSpriteSheet;
-        std::vector<SDL_Surface*> font;
-
         SDL_Surface*    atomIconTemplate;
 
         SDL_Surface*    moleculeIcon;
+
+        TTF_Font        *font;
+        SDL_Color       textColor;
 
         Button          menuButtons[NUM_MENU_BUTTONS];
         Button          elMenuButton;

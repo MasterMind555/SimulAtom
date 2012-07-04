@@ -10,9 +10,9 @@ SimulAtomMain::SimulAtomMain() {
     playIcon = NULL;
     exitIcon = NULL;
     atomIconTemplate = NULL;
-    fontSpriteSheet = NULL;
     preciseCollision = false;
-
+    textColor = { 255, 255, 255};
+    font = NULL;
     selected = 1;
 
     running = true;

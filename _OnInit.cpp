@@ -13,6 +13,12 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
+    if( TTF_Init() == -1 ) {
+		return false;
+	}
+
+    SDL_WM_SetCaption( "SimulAtom", NULL );
+
     if((screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL) {
         return false;
     }
@@ -50,32 +56,25 @@ bool SimulAtomMain::OnInit() {
         printf("Can't find element menu icon");
         return false;
     }
-    if((fontSpriteSheet = CSurface::onLoadPng("img/font-spritesheet.png")) == NULL) {
-        printf("Can't find the font spritesheet");
+
+    if((font = TTF_OpenFont("LUCON.ttf", 12 )) == NULL) {
+        printf("Can't find the font");
         return false;
     }
-
     menuButtons[PLAY_BUTTON].setIcon(&playIcon);
     menuButtons[EXIT_BUTTON].setIcon(&exitIcon);
 
-    atomIcons.push_back(atomIconTemplate);
-
-
-    /*
-    int i;
-    for(i = 0; i < 62; i++)
+    int i, w, h;
+    for(i = 0; i < sizeof(TAtoms); i++)
     {
-        SDL_Surface temp;
-        SDL_Rect zone;
-        zone.x = (i * 10) % 427;
-        zone.y = (i / 427) * 11;
-        zone.w = 10;
-        zone.h = 11;
-        printf("%d %d %d %d \n", zone.x, zone.y, zone.w, zone.h);
-        CSurface::onDraw(&temp, fontSpriteSheet, 0, 0, &zone);
-        font.push_back(&temp);
+        atomIcons.push_back(atomIconTemplate);
+        if(TTF_SizeText(font, "H", &w, &h)){
+            printf("%s", TTF_GetError());
+        }
+
+        CSurface::onDraw(atomIcons[i], TTF_RenderText_Solid(font, "H", textColor), (ATOM_ICON_WIDTH / 2) - (w / 2), (ATOM_ICON_HEIGHT / 2) - (h / 2), NULL);
     }
-    */
+
 
 
 
