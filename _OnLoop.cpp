@@ -57,6 +57,8 @@ void SimulAtomMain::OnLoop() {
             //printf("%d \n", count2 - count1);
         }
 
+
+    }
     fpsFrames++;
     fpsLastUpdateTime = fpsCurrentTime;
     fpsCurrentTime = SDL_GetTicks();
@@ -66,7 +68,6 @@ void SimulAtomMain::OnLoop() {
 
     if(waitTime > 0)
         SDL_Delay(waitTime);
-    }
 
 }
 

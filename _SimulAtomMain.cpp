@@ -95,9 +95,9 @@ void SimulAtomMain::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode){
         if(sym == SDLK_SPACE)
             simulating = !simulating;
         if(sym == SDLK_UP)
-            selected = (selected + 1) % sizeof(TAtoms);
-        if(sym == SDLK_DOWN)
-            selected = (selected - 1) % sizeof(TAtoms);
+            selected = (selected + 1) % ATOMS_TYPE_AMOUNT;
+        if(sym == SDLK_DOWN )
+            selected = (selected - 1 + ATOMS_TYPE_AMOUNT) % ATOMS_TYPE_AMOUNT;
 
     }
 
@@ -144,3 +144,4 @@ void SimulAtomMain::OnRButtonDown(int mX, int mY){
     }
 
 }
+

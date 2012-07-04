@@ -25,6 +25,7 @@
 
 #include "Atom.h"
 #include "Molecule.h"
+#include <string>
 
 class SimulAtomMain : public CEvent {
 
@@ -43,7 +44,7 @@ class SimulAtomMain : public CEvent {
         SDL_Surface*    exitIcon;
         SDL_Surface*    elMenuIcon;
 
-        std::vector<SDL_Surface*> atomIcons;
+        SDL_Surface*    atomIcons[ATOMS_TYPE_AMOUNT];
 
         SDL_Surface*    atomIconTemplate;
 
@@ -70,13 +71,15 @@ class SimulAtomMain : public CEvent {
         void            bPolarCovalent(int i, int e);
         void            bIonic(int i, int e);
 
+        bool            elMenuOpened;
+
         /*
             Switches of Simulation
         */
 
         bool            preciseCollision;
 
-        bool            elMenuOpened;
+
     public:
         SimulAtomMain();
 

@@ -14,6 +14,7 @@
 */
 
     #include <vector>
+    #include <string>
 
     //The screen's dimensions
     const int SCREEN_WIDTH = 1024;
@@ -23,16 +24,16 @@
     const int SA_LOGO_WIDTH = 566;
     const int SA_LOGO_HEIGHT = 439;
 
-
-    //How many buttons we have in the menu
-
     const int ATOM_ICON_WIDTH = 21;
     const int ATOM_ICON_HEIGHT = 21;
 
     const int MOLECULE_ICON_WIDTH = 20;
     const int MOLECULE_ICON_HEIGHT = 20;
 
+    //How many buttons we have in the menu
     const int NUM_MENU_BUTTONS = 2;
+
+    const int ATOMS_TYPE_AMOUNT = 18;
 
     const int MAX_FPS = 60;
 
@@ -76,6 +77,7 @@
 
 
     struct AtomProp {
+        const char* symbol;
         int protons;
         int neutrons;
         int oxydationNumber;
@@ -223,6 +225,7 @@
 
     */
     const AtomTemplate THydrogen {
+        "H",
         HYDROGEN,
         1,
         MINUS_ONE + PLUS_ONE,
@@ -233,6 +236,7 @@
 
 
     const AtomTemplate THelium {
+        "He",
         HELIUM,
         2,
         ZERO,
@@ -242,6 +246,7 @@
     };
 
     const AtomTemplate TLithium {
+        "Li",
         LITHIUM,
         4,
         PLUS_ONE,
@@ -251,6 +256,7 @@
     };
 
     const AtomTemplate TBeryllium {
+        "Be",
         BERYLLIUM,
         5,
         PLUS_TWO,
@@ -260,6 +266,7 @@
     };
 
     const AtomTemplate TBoron {
+        "B",
         BORON,
         6,
         PLUS_THREE,
@@ -269,6 +276,7 @@
     };
 
     const AtomTemplate TCarbon {
+        "C",
         CARBON,
         6,
         PLUS_FOUR + MINUS_TWO + MINUS_FOUR,
@@ -278,6 +286,7 @@
     };
 
     const AtomTemplate TNitrogen {
+        "N",
         NITROGEN,
         7,
         PLUS_FIVE + MINUS_THREE + PLUS_ONE + PLUS_TWO + PLUS_THREE + PLUS_FOUR,
@@ -287,6 +296,7 @@
     };
 
     const AtomTemplate TOxygen {
+        "O",
         OXYGEN,
         8,
         MINUS_TWO + PLUS_TWO + MINUS_ONE,//Not sure if correct or the engine requires that at this state
@@ -296,6 +306,7 @@
     };
 
     const AtomTemplate TFluorine {
+        "F",
         FLUORINE,
         10,
         MINUS_ONE,
@@ -305,6 +316,7 @@
     };
 
     const AtomTemplate TNeon {
+        "Ne",
         NEON,
         10,
         ZERO,
@@ -314,6 +326,7 @@
     };
 
     const AtomTemplate TSodium {
+        "Na",
         SODIUM,
         10,
         PLUS_ONE,
@@ -323,6 +336,7 @@
     };
 
     const AtomTemplate TMagnesium {
+        "Mg",
         MAGNESIUM,
         12,
         PLUS_TWO,
@@ -332,6 +346,7 @@
     };
 
     const AtomTemplate TAluminum {
+        "Al",
 		ALUMINUM,
 		14,
 		PLUS_THREE,
@@ -341,6 +356,7 @@
 	};
 
     const AtomTemplate TSilicon {
+        "Si",
 		SILICON,
 		14,
 		PLUS_FOUR + MINUS_FOUR,
@@ -350,6 +366,7 @@
 	};
 
 	const AtomTemplate TPhosphorus {
+	    "P",
 		PHOSPHORUS,
 		16,
 		PLUS_FIVE + PLUS_THREE + MINUS_THREE,
@@ -359,6 +376,7 @@
 	};
 
 	const AtomTemplate TSulfur {
+	    "S",
 		SULFUR,
 		16,
 		PLUS_SIX + PLUS_FOUR + MINUS_TWO + PLUS_TWO,
@@ -368,6 +386,7 @@
 	};
 
     const AtomTemplate TChlorine {
+        "Cl",
 		CHLORINE,
         18,
         MINUS_ONE + PLUS_ONE + PLUS_THREE + PLUS_FOUR + PLUS_FIVE + PLUS_SIX + PLUS_SEVEN,
@@ -376,8 +395,8 @@
 		false
 	};
 
-    const AtomTemplate TAtoms[18] = {
-        THydrogen,
+    const AtomTemplate TAtoms[ATOMS_TYPE_AMOUNT] = {
+        THydrogen,//Nothing
         THydrogen,
         THelium,
         TLithium,

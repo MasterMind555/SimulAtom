@@ -10,10 +10,12 @@ void SimulAtomMain::OnRender() {
         int i;
 
         for(i = 0; i < atoms.size(); i++)
-                CSurface::onDraw(screen, atomIcons[0], atoms[i]->getPosX(), atoms[i]->getPosY(), NULL);
+        {
+            CSurface::onDraw(screen, atomIcons[atoms[i]->getAmountProtons()], atoms[i]->getPosX(), atoms[i]->getPosY(), NULL);
+        }
 
         for(i = 0; i < molecules.size(); i++)
-                CSurface::onDraw(screen, moleculeIcon, molecules[i]->getPosX(), molecules[i]->getPosY(), NULL);
+            CSurface::onDraw(screen, moleculeIcon, molecules[i]->getPosX(), molecules[i]->getPosY(), NULL);
 
         CSurface::onDraw(screen, elMenuIcon, elMenuButton.getX(), elMenuButton.getY(), NULL);
     }
@@ -27,7 +29,6 @@ void SimulAtomMain::OnRender() {
         {
             CSurface::onDraw(screen, menuButtons[i].getIcon(), menuButtons[i].getX(), menuButtons[i].getY(), NULL);
         }
-
 
     }
 

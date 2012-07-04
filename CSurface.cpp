@@ -54,7 +54,6 @@ bool CSurface::onDraw(SDL_Surface* destination, SDL_Surface* source, int X, int 
     }
 
     SDL_Rect destR;
-
     destR.x = X;
     destR.y = Y;
 

@@ -43,11 +43,14 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
-    if((atomIconTemplate = CSurface::onLoadPng("img/atom.png")) == NULL) {
-        printf("Can't find atom icon");
-        return false;
+    int i;
+    for(i = 0; i < ATOMS_TYPE_AMOUNT; i++)
+    {
+        if((atomIcons[i] = CSurface::onLoadPng("img/atom.png")) == NULL) {
+            printf("Can't find atom icon");
+            return false;
+        }
     }
-
     if((moleculeIcon = CSurface::onLoadPng("img/h2.png")) == NULL) {
         printf("Can't find atom icon");
         return false;
@@ -61,22 +64,26 @@ bool SimulAtomMain::OnInit() {
         printf("Can't find the font");
         return false;
     }
+
     menuButtons[PLAY_BUTTON].setIcon(&playIcon);
     menuButtons[EXIT_BUTTON].setIcon(&exitIcon);
 
-    int i, w, h;
-    for(i = 0; i < sizeof(TAtoms); i++)
+
+
+    int w, h;
+    for(i = 1; i < ATOMS_TYPE_AMOUNT; i++)
     {
-        atomIcons.push_back(atomIconTemplate);
-        if(TTF_SizeText(font, "H", &w, &h)){
+
+        if(TTF_SizeText(font, TAtoms[i].symbol, &w, &h)){
             printf("%s", TTF_GetError());
         }
 
-        CSurface::onDraw(atomIcons[i], TTF_RenderText_Solid(font, "H", textColor), (ATOM_ICON_WIDTH / 2) - (w / 2), (ATOM_ICON_HEIGHT / 2) - (h / 2), NULL);
+        CSurface::onDraw(atomIcons[i],
+                         TTF_RenderText_Solid(font, TAtoms[i].symbol, textColor),
+                         (ATOM_ICON_WIDTH / 2) - (w / 2),
+                         (ATOM_ICON_HEIGHT / 2) - (h / 2),
+                         NULL);
+
     }
-
-
-
-
     return true;
 }
