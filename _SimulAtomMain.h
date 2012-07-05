@@ -47,8 +47,7 @@ class SimulAtomMain : public CEvent {
         SDL_Surface*    atomIcons[ATOMS_TYPE_AMOUNT];
 
         SDL_Surface*    atomIconTemplate;
-
-        SDL_Surface*    moleculeIcon;
+        SDL_Surface*    moleculeIconTemplate;
 
         TTF_Font        *font;
         SDL_Color       textColor;
@@ -62,7 +61,7 @@ class SimulAtomMain : public CEvent {
         int             gameState;
 
         void            setAtomDemo();
-        bool            checkCollision(int xA, int yA, int xB, int yB);
+        bool            checkCollision(int xA, int yA, int xB, int yB, bool aMol, bool bMol);
 
         void            createMolecule(int i, int numI, int e, int numE);
         void            checkReaction(int positive, int negative);

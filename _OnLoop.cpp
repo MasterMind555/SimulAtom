@@ -30,7 +30,7 @@ void SimulAtomMain::OnLoop() {
             for(e = 0; e < atoms.size(); e++)
                 if(e != i)
                 {
-                    if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
+                    if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY(), false, false))
                     {
                         atoms[i]->setVelX(atoms[i]->getVelX() * ATOM_SPEED_LOSS);
                         atoms[i]->setVelY(atoms[i]->getVelY() * ATOM_SPEED_LOSS);
@@ -41,7 +41,7 @@ void SimulAtomMain::OnLoop() {
                     }
                 }
             for(e = 0; e < molecules.size(); e++)
-                    if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), molecules[e]->getPosX(), molecules[e]->getPosY()))
+                    if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), molecules[e]->getPosX(), molecules[e]->getPosY(), false, true))
                     {
                         atoms[i]->setVelX(atoms[i]->getVelX() * ATOM_SPEED_LOSS);
                         atoms[i]->setVelY(atoms[i]->getVelY() * ATOM_SPEED_LOSS);
@@ -71,26 +71,97 @@ void SimulAtomMain::OnLoop() {
 
 }
 
-bool SimulAtomMain::checkCollision(int xA, int yA, int xB, int yB ){
+bool SimulAtomMain::checkCollision(int xA, int yA, int xB, int yB, bool aMol, bool bMol ){
 
-    if( yA + ATOM_ICON_HEIGHT <= yB )
+    //TODO: Optimize this
+    if(!aMol && !bMol)
     {
-        return false;
+        if( yA + ATOM_ICON_HEIGHT <= yB )
+        {
+            return false;
+        }
+
+        if( yA >= yB + ATOM_ICON_HEIGHT )
+        {
+            return false;
+        }
+
+        if( xA + ATOM_ICON_WIDTH <= xB )
+        {
+            return false;
+        }
+
+        if( xA >= xB + ATOM_ICON_WIDTH )
+        {
+            return false;
+        }
     }
-
-    if( yA >= yB + ATOM_ICON_HEIGHT )
+    else if(aMol && !bMol)
     {
-        return false;
+        if( yA + MOLECULE_ICON_HEIGHT <= yB )
+        {
+            return false;
+        }
+
+        if( yA >= yB + ATOM_ICON_HEIGHT )
+        {
+            return false;
+        }
+
+        if( xA + MOLECULE_ICON_WIDTH <= xB )
+        {
+            return false;
+        }
+
+        if( xA >= xB + ATOM_ICON_WIDTH )
+        {
+            return false;
+        }
     }
-
-    if( xA + ATOM_ICON_WIDTH <= xB )
+    else if(!aMol && bMol)
     {
-        return false;
+        if( yA + ATOM_ICON_HEIGHT <= yB )
+        {
+            return false;
+        }
+
+        if( yA >= yB + MOLECULE_ICON_HEIGHT )
+        {
+            return false;
+        }
+
+        if( xA + ATOM_ICON_WIDTH <= xB )
+        {
+            return false;
+        }
+
+        if( xA >= xB + MOLECULE_ICON_WIDTH )
+        {
+            return false;
+        }
+
     }
-
-    if( xA >= xB + ATOM_ICON_WIDTH )
+    else
     {
-        return false;
+        if( yA + MOLECULE_ICON_HEIGHT <= yB )
+        {
+            return false;
+        }
+
+        if( yA >= yB + MOLECULE_ICON_HEIGHT )
+        {
+            return false;
+        }
+
+        if( xA + MOLECULE_ICON_WIDTH <= xB )
+        {
+            return false;
+        }
+
+        if( xA >= xB + MOLECULE_ICON_WIDTH )
+        {
+            return false;
+        }
     }
 
     return true;

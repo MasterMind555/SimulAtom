@@ -10,6 +10,8 @@ SimulAtomMain::SimulAtomMain() {
     playIcon = NULL;
     exitIcon = NULL;
     atomIconTemplate = NULL;
+    moleculeIconTemplate = NULL;
+
     preciseCollision = false;
     textColor = { 255, 255, 255};
     font = NULL;
@@ -127,12 +129,12 @@ void SimulAtomMain::OnRButtonDown(int mX, int mY){
         int i;
         for(i = 0; i < atoms.size(); i++)
         {
-            if(checkCollision(mX, mY, atoms[i]->getPosX(), atoms[i]->getPosY()))
+            if(checkCollision(mX, mY, atoms[i]->getPosX(), atoms[i]->getPosY(), false, false))
                  atoms.erase(atoms.begin() + i);
         }
         for(i = 0; i < molecules.size(); i++)
         {
-            if(checkCollision(mX, mY, molecules[i]->getPosX(), molecules[i]->getPosY()))
+            if(checkCollision(mX, mY, molecules[i]->getPosX(), molecules[i]->getPosY(), false, true))
                  molecules.erase(molecules.begin() + i);
         }
     }

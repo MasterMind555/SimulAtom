@@ -7,7 +7,7 @@ void SimulAtomMain::OnCleanup() {
     free(playIcon);
     free(exitIcon);
     free(atomIconTemplate);
-    free(moleculeIcon);
+    free(moleculeIconTemplate);
 
     int i;
     for(i = 0; i < atoms.size(); i++)

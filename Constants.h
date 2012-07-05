@@ -27,8 +27,8 @@
     const int ATOM_ICON_WIDTH = 21;
     const int ATOM_ICON_HEIGHT = 21;
 
-    const int MOLECULE_ICON_WIDTH = 20;
-    const int MOLECULE_ICON_HEIGHT = 20;
+    const int MOLECULE_ICON_WIDTH = 43;
+    const int MOLECULE_ICON_HEIGHT = 43;
 
     //How many buttons we have in the menu
     const int NUM_MENU_BUTTONS = 2;
