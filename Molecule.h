@@ -31,14 +31,16 @@ class Molecule{
         int             getTemperature();
         void            setTemperature(int val);
 
+        char*           getFormula();
+
         void            move();
 
     private:
         int             posX;
         int             posY;
-
         int             velX;
         int             velY;
+        char*           formula;
 
         std::vector<Atom*>      atoms;
 

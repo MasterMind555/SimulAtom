@@ -1,6 +1,7 @@
 #include "Molecule.h"
 
 #include <stdio.h>
+#include <string.h>
 
 Molecule::Molecule(Atom* components, int size) {
 
@@ -11,7 +12,43 @@ Molecule::Molecule(Atom* components, int size) {
     for(i = 0; i < size; i++)
         atoms.push_back(&components[i]);
 
+    char *symb1 = (char*)TAtoms[atoms[0]->getAmountProtons()].symbol;
+    char *symb2 = (char*)TAtoms[atoms[1]->getAmountProtons()].symbol;
 
+    if(atoms[0]->getAmountProtons() == atoms[1]->getAmountProtons())//TODO: Add support for more then 2 atoms
+    {
+        for(i = 0; i < sizeof(symb1); i++)
+        {
+            if(symb1[i] == '\x0')
+                break;
+        }
+
+        formula = (char*) malloc (i + 2);
+        memcpy(formula, symb1, i);
+        char num = '2';
+        formula[i] = num;
+        formula[i + 1] = '\x0';
+    }
+    else
+    {
+        for(i = 0; i < sizeof(symb1); i++)
+        {
+            if(symb1[i] == '\x0')
+                break;
+        }
+        int e;
+        for(e = 0; e < sizeof(symb1); e++)
+        {
+            if(symb1[e] == '\x0')
+                break;
+        }
+        formula = (char*) malloc (i + e + 1);
+        memcpy(formula, symb1, i);
+        memcpy(formula + i, symb2, e);
+        formula[i + e + 1] = '\x0';
+    }
+
+    //printf("%s \n", formula);
     posX = atoms[0]->getPosX();
     posY = atoms[0]->getPosY();
 
@@ -94,4 +131,8 @@ int Molecule::getTemperature() {
 
 void Molecule::setTemperature(int val) {
     temperature = val;
+}
+
+char* Molecule::getFormula() {
+    return formula;
 }
