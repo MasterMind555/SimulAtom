@@ -38,7 +38,7 @@ SimulAtomMain::SimulAtomMain() {
     elMenuButton.setX(SCREEN_WIDTH - 53);
     elMenuButton.setY(0);
 
-    setAtomDemo();
+    //setAtomDemo();
 
 }
 

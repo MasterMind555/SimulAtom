@@ -31,24 +31,27 @@ Molecule::Molecule(Atom* components, int size) {
     }
     else
     {
+
+
         for(i = 0; i < sizeof(symb1); i++)
         {
             if(symb1[i] == '\x0')
                 break;
         }
         int e;
-        for(e = 0; e < sizeof(symb1); e++)
+        for(e = 0; e < sizeof(symb2); e++)
         {
-            if(symb1[e] == '\x0')
+            if(symb2[e] == '\x0')
                 break;
         }
+
         formula = (char*) malloc (i + e + 1);
+        memset(formula, '\x0', i + e + 1);
         memcpy(formula, symb1, i);
         memcpy(formula + i, symb2, e);
-        formula[i + e + 1] = '\x0';
+
     }
 
-    //printf("%s \n", formula);
     posX = atoms[0]->getPosX();
     posY = atoms[0]->getPosY();
 
