@@ -50,7 +50,7 @@ class SimulAtomMain : public CEvent {
         SDL_Surface*    moleculeIconTemplate;
 
         TTF_Font        *font;
-        SDL_Color       textColor;
+
 
         Button          menuButtons[NUM_MENU_BUTTONS];
         Button          elMenuButton;

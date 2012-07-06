@@ -37,6 +37,11 @@ Atom::Atom(){
 
 }
 
+Atom::~Atom()
+{
+
+}
+
 int Atom::getPosX(){
     return posX;
 }

@@ -12,12 +12,20 @@
     TO THE EXTENT THIS LICENSE MAY BE CONSIDERED TO BE A CONTRACT, THE LICENSOR GRANTS YOU THE RIGHTS CONTAINED HERE IN CONSIDERATION OF YOUR ACCEPTANCE OF SUCH TERMS AND CONDITIONS.
 */
 
-#include "Atom.h"
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <stdio.h>
+#include <string.h>
 #include <vector>
+
+#include "Atom.h"
+#include "CSurface.h"
+
 
 class Molecule{
     public:
-                        Molecule(Atom* components, int size);
+                        Molecule(Atom** components, int size, SDL_Surface* iconTemplate, TTF_Font* font);
+                        ~Molecule();
         int             getPosX();
         int             getPosY();
         void            setPosX(int val);
@@ -33,6 +41,8 @@ class Molecule{
 
         char*           getFormula();
 
+        SDL_Surface*    getIcon();
+
         void            move();
 
     private:
@@ -41,6 +51,8 @@ class Molecule{
         int             velX;
         int             velY;
         char*           formula;
+
+        SDL_Surface*    icon;
 
         std::vector<Atom*>      atoms;
 

@@ -40,6 +40,7 @@ void SimulAtomMain::OnLoop() {
                         break;
                     }
                 }
+
             for(e = 0; e < molecules.size(); e++)
                     if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), molecules[e]->getPosX(), molecules[e]->getPosY(), false, true))
                     {
@@ -169,12 +170,13 @@ bool SimulAtomMain::checkCollision(int xA, int yA, int xB, int yB, bool aMol, bo
 
 void SimulAtomMain::createMolecule(int i, int numI, int e, int numE)
 {
-    Atom reactives[numI + numE];
 
-    reactives[0] = *atoms[i];
-    reactives[1] = *atoms[e];
+    Atom* reactives[numI + numE];
 
-    molecules.push_back(new Molecule(reactives, 2));
+    reactives[0] = atoms[i];
+    reactives[1] = atoms[e];
+
+    molecules.push_back(new Molecule(reactives, 2, moleculeIconTemplate, font));
 
     if(i > e)//Prevents us from deleting the wrong class, since the indexing change when we delete an element
     {
@@ -183,6 +185,7 @@ void SimulAtomMain::createMolecule(int i, int numI, int e, int numE)
     }
     else
     {
+
         atoms.erase(atoms.begin() + e);
         atoms.erase(atoms.begin() + i);
     }

@@ -5,16 +5,22 @@ SimulAtomMain::SimulAtomMain() {
 
     //Sets all the pointers to NULL
     screen = NULL;
-    saLogo = NULL;
+
     background = NULL;
+    saLogo = NULL;
+
     playIcon = NULL;
     exitIcon = NULL;
+    elMenuIcon = NULL;
+
     atomIconTemplate = NULL;
     moleculeIconTemplate = NULL;
 
-    preciseCollision = false;
-    textColor = { 255, 255, 255};
     font = NULL;
+
+    preciseCollision = false;
+
+
     selected = 1;
 
     running = true;
@@ -114,10 +120,11 @@ void SimulAtomMain::OnLButtonDown(int mX, int mY){
     }
     else if(gameState == GAME_SCREEN)
     {
+
         if(elMenuButton.checkMouseClick(mX, mY, true))
             elMenuOpened = !elMenuOpened;
-
-        atoms.push_back(new Atom(TAtoms[selected], mX, mY));
+        else
+            atoms.push_back(new Atom(TAtoms[selected], mX, mY));
     }
 
 }

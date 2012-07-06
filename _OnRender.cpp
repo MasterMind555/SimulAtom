@@ -16,18 +16,9 @@ void SimulAtomMain::OnRender() {
 
         for(i = 0; i < molecules.size(); i++)
         {
-            CSurface::onDraw(screen, moleculeIconTemplate, molecules[i]->getPosX(), molecules[i]->getPosY(), NULL);
+            CSurface::onDraw(screen, molecules[i]->getIcon(), molecules[i]->getPosX(), molecules[i]->getPosY(), NULL);
 
-            int h, w;
-            if(TTF_SizeText(font, molecules[i]->getFormula(), &w, &h)){
-                printf("%s", TTF_GetError());
-            }
 
-            CSurface::onDraw(screen,
-                         TTF_RenderText_Solid(font, molecules[i]->getFormula(), textColor),
-                         (MOLECULE_ICON_WIDTH / 2) - (w / 2) + molecules[i]->getPosX(),
-                         (MOLECULE_ICON_HEIGHT / 2) - (h / 2) + molecules[i]->getPosY(),
-                         NULL);
         }
 
         CSurface::onDraw(screen, elMenuButton.getIcon(), elMenuButton.getX(), elMenuButton.getY(), NULL);

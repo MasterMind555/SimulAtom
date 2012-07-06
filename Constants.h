@@ -15,6 +15,7 @@
 
     #include <vector>
     #include <string>
+    #include <SDL.h>
 
     //The screen's dimensions
     const int SCREEN_WIDTH = 1024;
@@ -42,6 +43,7 @@
 
     const int ATOM_SPEED_LOSS = -.5;
 
+    const SDL_Color textColor = { 255, 255, 255 };
     //The order of the buttons
     enum {
         EXIT_BUTTON = 0,

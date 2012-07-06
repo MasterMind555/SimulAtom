@@ -1,16 +1,12 @@
 #include "Molecule.h"
 
-#include <stdio.h>
-#include <string.h>
 
-Molecule::Molecule(Atom* components, int size) {
 
-    velX = 0;
-    velY = 0;
+Molecule::Molecule(Atom** components, int size, SDL_Surface* iconTemplate, TTF_Font* font) {
 
     int i;
     for(i = 0; i < size; i++)
-        atoms.push_back(&components[i]);
+        atoms.push_back(components[i]);
 
     char *symb1 = (char*)TAtoms[atoms[0]->getAmountProtons()].symbol;
     char *symb2 = (char*)TAtoms[atoms[1]->getAmountProtons()].symbol;
@@ -58,7 +54,7 @@ Molecule::Molecule(Atom* components, int size) {
     int temp = 0;
     for(i = 0; i < size; i++)
     {
-        temp += components[i].getTemperature();
+        temp += components[i]->getTemperature();
     }
 
     if(temp > 0)
@@ -66,9 +62,34 @@ Molecule::Molecule(Atom* components, int size) {
 
     temperature = temp;
 
+
+    icon = new SDL_Surface(*iconTemplate);
+
+    int h, w;
+    if(TTF_SizeText(font, formula, &w, &h)){
+        printf("%s", TTF_GetError());
+    }
+
+    CSurface::onDraw(icon,
+                 TTF_RenderText_Solid(font, formula, textColor),
+                 (MOLECULE_ICON_WIDTH / 2) - (w / 2),
+                 (MOLECULE_ICON_HEIGHT / 2) - (h / 2),
+                 NULL);
+
+}
+
+Molecule::~Molecule(){
+
+    free(icon);
+
+    int i;
+    for(i = 0; i < atoms.size(); i++)
+        free(atoms[i]);
+
 }
 
 void Molecule::move() {
+
     int wiggleX = 0;
     int wiggleY = 0;
 
@@ -138,4 +159,8 @@ void Molecule::setTemperature(int val) {
 
 char* Molecule::getFormula() {
     return formula;
+}
+
+SDL_Surface* Molecule::getIcon() {
+    return icon;
 }
