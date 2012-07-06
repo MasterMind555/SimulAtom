@@ -62,8 +62,7 @@ Molecule::Molecule(Atom** components, int size, SDL_Surface* iconTemplate, TTF_F
 
     temperature = temp;
 
-
-    icon = new SDL_Surface(*iconTemplate);
+    icon = CSurface::onLoadPng("img/molecule.png");//Not the best, but works
 
     int h, w;
     if(TTF_SizeText(font, formula, &w, &h)){

@@ -17,8 +17,6 @@ void SimulAtomMain::OnRender() {
         for(i = 0; i < molecules.size(); i++)
         {
             CSurface::onDraw(screen, molecules[i]->getIcon(), molecules[i]->getPosX(), molecules[i]->getPosY(), NULL);
-
-
         }
 
         CSurface::onDraw(screen, elMenuButton.getIcon(), elMenuButton.getX(), elMenuButton.getY(), NULL);
