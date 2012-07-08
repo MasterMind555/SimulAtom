@@ -14,6 +14,7 @@
 
 
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <vector>
 
 #include "CEvent.h"
@@ -24,6 +25,7 @@
 
 #include "Atom.h"
 #include "Molecule.h"
+#include <string>
 
 class SimulAtomMain : public CEvent {
 
@@ -40,14 +42,18 @@ class SimulAtomMain : public CEvent {
 
         SDL_Surface*    playIcon;
         SDL_Surface*    exitIcon;
+        SDL_Surface*    elMenuIcon;
 
-        std::vector<SDL_Surface*> atomIcons;
+        SDL_Surface*    atomIcons[ATOMS_TYPE_AMOUNT];
 
         SDL_Surface*    atomIconTemplate;
+        SDL_Surface*    moleculeIconTemplate;
 
-        SDL_Surface*    moleculeIcon;
+        TTF_Font        *font;
+
 
         Button          menuButtons[NUM_MENU_BUTTONS];
+        Button          elMenuButton;
 
         std::vector<Atom*>          atoms;
         std::vector<Molecule*>      molecules;
@@ -55,7 +61,7 @@ class SimulAtomMain : public CEvent {
         int             gameState;
 
         void            setAtomDemo();
-        bool            checkCollision(int xA, int yA, int xB, int yB);
+        bool            checkCollision(int xA, int yA, int xB, int yB, bool aMol, bool bMol);
 
         void            createMolecule(int i, int numI, int e, int numE);
         void            checkReaction(int positive, int negative);
@@ -64,11 +70,14 @@ class SimulAtomMain : public CEvent {
         void            bPolarCovalent(int i, int e);
         void            bIonic(int i, int e);
 
+        bool            elMenuOpened;
+
         /*
             Switches of Simulation
         */
 
         bool            preciseCollision;
+
 
     public:
         SimulAtomMain();
@@ -92,6 +101,8 @@ class SimulAtomMain : public CEvent {
         void OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode);
 
         void OnLButtonDown(int mX, int mY);
+
+        void OnRButtonDown(int mX, int mY);
 
 };
 

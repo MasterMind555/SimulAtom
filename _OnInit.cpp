@@ -13,6 +13,12 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
+    if( TTF_Init() == -1 ) {
+		return false;
+	}
+
+    SDL_WM_SetCaption( "SimulAtom", NULL );
+
     if((screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL) {
         return false;
     }
@@ -37,47 +43,53 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
-    if((atomIconTemplate = CSurface::onLoadPng("img/atom.png")) == NULL) {
+    int i;
+    for(i = 0; i < ATOMS_TYPE_AMOUNT; i++)
+    {
+        if((atomIcons[i] = CSurface::onLoadPng("img/atom.png")) == NULL) {
+            printf("Can't find atom icon");
+            return false;
+        }
+    }
+    if((moleculeIconTemplate = CSurface::onLoadPng("img/molecule.png")) == NULL) {
         printf("Can't find atom icon");
         return false;
     }
-
-    if((moleculeIcon = CSurface::onLoadPng("img/h2.png")) == NULL) {
-        printf("Can't find atom icon");
+    if((elMenuIcon = CSurface::onLoadPng("img/menuslide.png")) == NULL) {
+        printf("Can't find element menu icon");
         return false;
     }
 
-    const bool h[6][5] = {
-        {1, 0, 0, 0, 1},
-        {1, 0, 0, 0, 1},
-        {1, 1, 1, 1, 1},
-        {1, 0, 0, 0, 1},
-        {1, 0, 0, 0, 1},
-        {1, 0, 0, 0, 1}
-    };
-
-    const bool he[6][11] = {
-        { 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-        { 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0},
-        { 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1},
-        { 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0},
-        { 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0},
-        { 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0}
-    };
-
-    int i, e;
-
-    for(i = 0; i < 2; i++)
-        atomIcons.push_back(atomIconTemplate);
-
-    for(i = 0; i < 6; i++)
-        for(e = 0; e < 5; e++)
-            if(h[i][e])
-                CSurface::setPixel(atomIcons[0], ATOM_ICON_WIDTH / 2 - 3 + e, ATOM_ICON_HEIGHT / 2 - 2 + i, 0xFFFFFF);
+    if((font = TTF_OpenFont("LUCON.ttf", 12 )) == NULL) {
+        printf("Can't find the font");
+        return false;
+    }
 
     menuButtons[PLAY_BUTTON].setIcon(&playIcon);
     menuButtons[EXIT_BUTTON].setIcon(&exitIcon);
+    elMenuButton.setIcon(&elMenuIcon);
 
+    if(menuButtons[EXIT_BUTTON].checkIfValid() == false)
+        printf("Problem while initializing the %dth button", EXIT_BUTTON);
+    if(menuButtons[PLAY_BUTTON].checkIfValid() == false)
+        printf("Problem while initializing the %dth button", PLAY_BUTTON);
+    if(elMenuButton.checkIfValid() == false)
+        printf("Problem while initializing the open menu button");
 
+    int w, h;
+    for(i = 1; i < ATOMS_TYPE_AMOUNT; i++)
+    {
+
+        if(TTF_SizeText(font, TAtoms[i].symbol, &w, &h)){
+            printf("%s", TTF_GetError());
+        }
+
+        CSurface::onDraw(atomIcons[i],
+                         TTF_RenderText_Solid(font, TAtoms[i].symbol, textColor),
+                         (ATOM_ICON_WIDTH / 2) - (w / 2),
+                         (ATOM_ICON_HEIGHT / 2) - (h / 2),
+                         NULL);
+
+    }
     return true;
 }

@@ -22,6 +22,7 @@ class Atom{
     public:
                         Atom(AtomTemplate properties, int x, int y);
                         Atom();
+                        ~Atom();
                         Atom(int x, int y, int numProtons, int numNeutrons, int oxydationNum, float valEn);
         int             getPosX();
         int             getPosY();

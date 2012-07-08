@@ -24,7 +24,7 @@ class CSurface {
 
         static SDL_Surface* onLoadPng(char* file);
 
-        static bool onDraw(SDL_Surface* destination, SDL_Surface* source, int X, int Y);
+        static bool onDraw(SDL_Surface* destination, SDL_Surface* source, int X, int Y, SDL_Rect* section);
 
         static bool transparent(SDL_Surface* destination, int R, int G, int B);
 

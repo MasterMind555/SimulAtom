@@ -37,6 +37,11 @@ Atom::Atom(){
 
 }
 
+Atom::~Atom()
+{
+
+}
+
 int Atom::getPosX(){
     return posX;
 }
@@ -130,13 +135,8 @@ void Atom::setEn(float val){
 
 void Atom::move(){
 
-    int wiggleX = 0;
-    int wiggleY = 0;
-
-    wiggleX = ((rand() % 3) - 1) *(temperature / 50);
-    wiggleY = ((rand() % 3) - 1)*(temperature / 50);
-
-
+    velX += ((rand() % 3) - 1) * (temperature / 50);//Moves randomly
+    velY += ((rand() % 3) - 1) * (temperature / 50);
 
     if(posX + velX < 0 || posX + velX > SCREEN_WIDTH - ATOM_ICON_WIDTH){//Minus 20 because of the offset of the texture ( Which is 20x20 )
         velX *= -1;
@@ -146,15 +146,10 @@ void Atom::move(){
         velY *= -1;
     }
 
-    if(posX + wiggleX < 0 || posX + wiggleX > SCREEN_WIDTH - ATOM_ICON_WIDTH){//Minus 20 because of the offset of the texture ( Which is 20x20 )
-        wiggleX *= -1;
-    }
+    posX += velX;
+    posY += velY;
 
-    if(posY + wiggleY < 0 || posY + wiggleY > SCREEN_HEIGHT - ATOM_ICON_HEIGHT){
-        wiggleY *= -1;
-    }
-
-    posX += velX + wiggleX;
-    posY += velY + wiggleY;
+    velX *= ATOM_SPEED_LOSS;
+    velY *= ATOM_SPEED_LOSS;
 
 }

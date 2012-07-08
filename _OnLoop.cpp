@@ -22,25 +22,44 @@ void SimulAtomMain::OnLoop() {
         for(i = 0; i < atoms.size(); i++)
                     atoms[i]->move();
 
+        for(i = 0; i < molecules.size(); i++)
+                molecules[i]->move();
+
         for(i = 0; i < atoms.size(); i++)
+        {
             for(e = 0; e < atoms.size(); e++)
                 if(e != i)
                 {
-                    if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY()))
+                    if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), atoms[e]->getPosX(), atoms[e]->getPosY(), false, false))
                     {
+                        atoms[i]->setVelX(atoms[i]->getVelX() * ATOM_SPEED_LOSS);
+                        atoms[i]->setVelY(atoms[i]->getVelY() * ATOM_SPEED_LOSS);
+                        atoms[e]->setVelX(atoms[e]->getVelX() * ATOM_SPEED_LOSS);
+                        atoms[e]->setVelY(atoms[e]->getVelY() * ATOM_SPEED_LOSS);
                         checkReaction(i, e);
                         break;
                     }
                 }
 
-        for(i = 0; i < molecules.size(); i++)
-                    molecules[i]->move();
+            for(e = 0; e < molecules.size(); e++)
+                    if(checkCollision(atoms[i]->getPosX(), atoms[i]->getPosY(), molecules[e]->getPosX(), molecules[e]->getPosY(), false, true))
+                    {
+                        atoms[i]->setVelX(atoms[i]->getVelX() * ATOM_SPEED_LOSS);
+                        atoms[i]->setVelY(atoms[i]->getVelY() * ATOM_SPEED_LOSS);
+                        molecules[e]->setVelX(molecules[e]->getVelX() * ATOM_SPEED_LOSS);
+                        molecules[e]->setVelY(molecules[e]->getVelY() * ATOM_SPEED_LOSS);
+                        break;
+                    }
+
+        }
 
 
             //count2 = SDL_GetTicks();
             //printf("%d \n", count2 - count1);
         }
 
+
+    }
     fpsFrames++;
     fpsLastUpdateTime = fpsCurrentTime;
     fpsCurrentTime = SDL_GetTicks();
@@ -50,30 +69,100 @@ void SimulAtomMain::OnLoop() {
 
     if(waitTime > 0)
         SDL_Delay(waitTime);
-    }
 
 }
 
-bool SimulAtomMain::checkCollision(int xA, int yA, int xB, int yB ){
+bool SimulAtomMain::checkCollision(int xA, int yA, int xB, int yB, bool aMol, bool bMol ){
 
-    if( yA + ATOM_ICON_HEIGHT <= yB )
+    //TODO: Optimize this
+    if(!aMol && !bMol)
     {
-        return false;
+        if( yA + ATOM_ICON_HEIGHT <= yB )
+        {
+            return false;
+        }
+
+        if( yA >= yB + ATOM_ICON_HEIGHT )
+        {
+            return false;
+        }
+
+        if( xA + ATOM_ICON_WIDTH <= xB )
+        {
+            return false;
+        }
+
+        if( xA >= xB + ATOM_ICON_WIDTH )
+        {
+            return false;
+        }
     }
-
-    if( yA >= yB + ATOM_ICON_HEIGHT )
+    else if(aMol && !bMol)
     {
-        return false;
+        if( yA + MOLECULE_ICON_HEIGHT <= yB )
+        {
+            return false;
+        }
+
+        if( yA >= yB + ATOM_ICON_HEIGHT )
+        {
+            return false;
+        }
+
+        if( xA + MOLECULE_ICON_WIDTH <= xB )
+        {
+            return false;
+        }
+
+        if( xA >= xB + ATOM_ICON_WIDTH )
+        {
+            return false;
+        }
     }
-
-    if( xA + ATOM_ICON_WIDTH <= xB )
+    else if(!aMol && bMol)
     {
-        return false;
+        if( yA + ATOM_ICON_HEIGHT <= yB )
+        {
+            return false;
+        }
+
+        if( yA >= yB + MOLECULE_ICON_HEIGHT )
+        {
+            return false;
+        }
+
+        if( xA + ATOM_ICON_WIDTH <= xB )
+        {
+            return false;
+        }
+
+        if( xA >= xB + MOLECULE_ICON_WIDTH )
+        {
+            return false;
+        }
+
     }
-
-    if( xA >= xB + ATOM_ICON_WIDTH )
+    else
     {
-        return false;
+        if( yA + MOLECULE_ICON_HEIGHT <= yB )
+        {
+            return false;
+        }
+
+        if( yA >= yB + MOLECULE_ICON_HEIGHT )
+        {
+            return false;
+        }
+
+        if( xA + MOLECULE_ICON_WIDTH <= xB )
+        {
+            return false;
+        }
+
+        if( xA >= xB + MOLECULE_ICON_WIDTH )
+        {
+            return false;
+        }
     }
 
     return true;
@@ -81,12 +170,13 @@ bool SimulAtomMain::checkCollision(int xA, int yA, int xB, int yB ){
 
 void SimulAtomMain::createMolecule(int i, int numI, int e, int numE)
 {
-    Atom reactives[numI + numE];
 
-    reactives[0] = *atoms[i];
-    reactives[1] = *atoms[e];
+    Atom* reactives[numI + numE];
 
-    molecules.push_back(new Molecule(reactives, 2));
+    reactives[0] = atoms[i];
+    reactives[1] = atoms[e];
+
+    molecules.push_back(new Molecule(reactives, 2, moleculeIconTemplate, font));
 
     if(i > e)//Prevents us from deleting the wrong class, since the indexing change when we delete an element
     {
@@ -95,6 +185,7 @@ void SimulAtomMain::createMolecule(int i, int numI, int e, int numE)
     }
     else
     {
+
         atoms.erase(atoms.begin() + e);
         atoms.erase(atoms.begin() + i);
     }
@@ -107,7 +198,7 @@ void SimulAtomMain::checkReaction(int i, int e)
     if(dif < 0)
         dif *= -1;
 
-    if(dif < 0.5 && dif > 0)
+    if(dif < 0.5 && dif >= 0)
         bNonPolarCovalent(i, e);
     else if(dif < 1.6 && dif >= 0.5)
         bPolarCovalent(i, e);
@@ -128,12 +219,12 @@ void SimulAtomMain::bNonPolarCovalent(int i, int e){
     int iOx = atoms[i]->getOxyNumber();
     int eOx = atoms[e]->getOxyNumber();
 
-    if(iOx < 0)
-        iOx *= -1;
-    if(eOx < 0)
-        eOx *= -1;
-    if(iOx == eOx)
+    if((iOx % 256 >= 128 && eOx % 256 >= 128) ||
+       (iOx % 128 >= 64 && eOx % 128 >= 64) ||
+       (iOx % 64 >= 32 && eOx % 64 >= 32) ||
+       (iOx % 32 >= 16 && eOx % 32 >= 16))
         createMolecule(i, 1, e, 1);
+
 
 }
 

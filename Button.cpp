@@ -15,16 +15,10 @@ void Button::sleep(){
 }
 
 bool Button::checkMouseClick(int X, int Y, bool click){
-        if(click == true)
-        {
-             if(Y >= y &&
-               Y <= y + height &&
-               X >= x &&
-               X <= x + width)//If the mouse is within the bounds of the button when the click happends
-               {
-                   return true;
-               }
-        }
+
+        if(click && checkMouseOver(X, Y))
+            return true;
+
     return false;
 }
 bool Button::checkMouseOver(int X, int Y){
@@ -32,7 +26,7 @@ bool Button::checkMouseOver(int X, int Y){
     if(Y >= y &&
        Y <= y + height &&
        X >= x &&
-       X <= x + width)//If the mouse is within the bounds of the button when the click happends
+       X <= x + width)//If the mouse is within the bounds of the button when the click happens
        {
            return true;
        }
@@ -40,14 +34,14 @@ bool Button::checkMouseOver(int X, int Y){
 }
 
 bool Button::checkMouseExit(int X, int Y){
-    if(lastPos == NULL)//If we don't know if the mouse was on or outside the button before
+    if(lastPos == NULL)//If we don't know if the mouse was previously on or outside the button
     {
         lastPos = checkMouseOver(X, Y);//Check it now
         return false;
     }
     else
     {
-        if(lastPos == true && checkMouseOver(X, Y) == false)//If the mouse was on the button last time we checked but it is no more
+        if(lastPos == true && checkMouseOver(X, Y) == false)//If the mouse was on the button last time we checked, but it is no more
         {
             lastPos = false;
             return true;
@@ -57,10 +51,11 @@ bool Button::checkMouseExit(int X, int Y){
 }
 
 bool Button::checkIfValid() {
-    if( x > 0 && x < SCREEN_WIDTH &&
-        y > 0 && y < SCREEN_HEIGHT &&
+    if( x >= 0 && x < SCREEN_WIDTH &&
+        y >= 0 && y < SCREEN_HEIGHT &&
         width > 0 && width < SCREEN_WIDTH &&
-        height > 0 && height < SCREEN_HEIGHT)//Cbecks if the variables are set to a correct number
+        height > 0 && height < SCREEN_HEIGHT &&
+        icon != NULL)//Checks if the variables are set to a correct number
         return true;
 
     return false;
@@ -82,7 +77,6 @@ void Button::setX(int val){
 void Button::setY(int val){
     y = val;
 }
-
 
 int Button::getWidth(){
     return width;
