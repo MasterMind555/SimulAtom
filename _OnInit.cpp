@@ -60,7 +60,7 @@ bool SimulAtomMain::OnInit() {
         return false;
     }
 
-    if((font = TTF_OpenFont("LUCON.ttf", 12 )) == NULL) {
+    if((font = TTF_OpenFont("MiniSet2.ttf", 12 )) == NULL) {
         printf("Can't find the font");
         return false;
     }

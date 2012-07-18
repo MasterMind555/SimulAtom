@@ -36,7 +36,7 @@
 
     const int ATOMS_TYPE_AMOUNT = 18;
 
-    const int MAX_FPS = 60;
+    const int MAX_FPS = 10;
 
     const int MAX_ATOMS = 256;
     const int MAX_MOLECULES = 128;
@@ -301,7 +301,7 @@
         "O",
         OXYGEN,
         8,
-        MINUS_TWO + PLUS_TWO + MINUS_ONE,//Not sure if correct or the engine requires that at this state
+        MINUS_TWO /*+ MINUS_ONE*/,//Only -1 with peroxydes, and there's no ways to check for this at the moment.
         6,
         3.44,
         false
